@@ -1,0 +1,103 @@
+<div class="share-page">
+
+  <div class="share-container">
+
+    <div class="page-header">
+      <p class="eyebrow">YOUR STORY MATTERS</p>
+
+      <h1>Share Your Story</h1>
+
+      <p>
+        Tell the world about a dream, an experience,
+        or simply something on your mind.
+      </p>
+    </div>
+    <form [formGroup]="storyForm" (ngSubmit)="publishStory()">
+
+    <div class="form-group">
+
+      <label for="category">What kind of story is this?</label>
+
+      <select id="category" formControlName="category">
+        <option value="Dream">🌙 Dream</option>
+        <option value="Real Life">🌎 Real Life</option>
+        <option value="Thought">💭 Thought</option>
+      </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label for="title">Title</label>
+
+      <input
+        id="title"
+        type="text"
+        formControlName="title"
+        placeholder="Give your story a title..."
+      >
+      @if (storyForm.controls.title.touched && storyForm.controls.title.invalid) {
+
+        <p class="error-message">
+
+          @if (storyForm.controls.title.errors?.['required']) {
+            Title is required.
+          }
+
+          @if (storyForm.controls.title.errors?.['minlength']) {
+            Title must be at least 3 characters.
+          }
+
+        </p>
+
+      }
+
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label for="story">Your Story</label>
+
+      <textarea
+        id="story"
+        rows="10"
+        formControlName="story"
+        placeholder="Tell us what happened..."
+      ></textarea>
+
+      @if (storyForm.controls.story.touched && storyForm.controls.story.invalid) {
+
+        <p class="error-message">
+
+          @if (storyForm.controls.story.errors?.['required']) {
+            Please write your story.
+          }
+
+          @if (storyForm.controls.story.errors?.['minlength']) {
+            Your story must be at least 10 characters.
+          }
+
+        </p>
+
+      }
+
+    </div>
+
+    <button class="publish-button" type="submit">
+      Publish Story
+    </button>
+
+    @if (submitted) {
+      <p class="success-message">
+        Your story is ready to be published! ✨
+      </p>
+    }
+
+  </form>
+
+  </div>
+
+</div>

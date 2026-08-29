@@ -1,0 +1,97 @@
+.explore {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 70px 25px;
+}
+
+.explore-header {
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: #888;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: 52px;
+  margin: 0;
+  color: #f5f5f5;
+}
+
+.subtitle {
+  max-width: 650px;
+  margin: 20px auto 0;
+  color: #999;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.categories {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 50px 0 35px;
+}
+
+.categories button {
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: 1px solid #333;
+  background: transparent;
+  color: #999;
+  cursor: pointer;
+}
+
+.categories button.active {
+  background: #f5f5f5;
+  color: #111;
+}
+
+.stories {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.story-card {
+  padding: 30px;
+  border: 1px solid #292929;
+  border-radius: 14px;
+  background: #151515;
+  transition: border-color 0.2s ease;
+}
+
+.story-card:hover {
+  border-color: #444;
+}
+
+.story-type {
+  color: #999;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.story-card h2 {
+  margin: 0 0 12px;
+  color: #f5f5f5;
+  font-size: 24px;
+}
+
+.story-card p {
+  color: #999;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.story-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #252525;
+  color: #777;
+  font-size: 14px;
+}

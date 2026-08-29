@@ -1,0 +1,303 @@
+.communities-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 70px 35px;
+}
+
+
+/* =========================
+   HEADERS
+========================= */
+
+.community-header,
+.discussion-header {
+  text-align: center;
+  margin-bottom: 55px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: #777;
+}
+
+.community-header h1,
+.discussion-header h1 {
+  font-size: 58px;
+  margin: 15px 0;
+}
+
+.community-header p,
+.discussion-header p {
+  color: #999;
+  font-size: 17px;
+}
+
+
+/* =========================
+   DISCOVER
+========================= */
+
+.discover-section h2 {
+  font-size: 28px;
+  margin-bottom: 28px;
+}
+
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.community-card {
+  border: 1px solid #333;
+  border-radius: 16px;
+  padding: 30px;
+  background: #151515;
+}
+
+.community-icon {
+  font-size: 36px;
+  margin-bottom: 18px;
+}
+
+.community-card h3 {
+  font-size: 23px;
+  margin-bottom: 12px;
+}
+
+.description {
+  color: #999;
+  line-height: 1.6;
+}
+
+.members {
+  color: #777;
+  font-size: 14px;
+  margin: 20px 0;
+}
+
+.join-button {
+  width: 100%;
+  padding: 13px;
+  border-radius: 8px;
+  background: white;
+  color: black;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.join-button:hover {
+  opacity: 0.85;
+}
+
+
+/* =========================
+   DISCUSSION LAYOUT
+========================= */
+
+.discussion-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 45px;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.community-sidebar {
+  border-right: 1px solid #292929;
+  padding-right: 25px;
+}
+
+.community-sidebar h2 {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.community-nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 12px;
+  margin-bottom: 6px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: #999;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.community-nav:hover {
+  background: #181818;
+  color: white;
+}
+
+.community-nav.active {
+  background: #222;
+  color: white;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: #292929;
+  margin: 20px 0;
+}
+
+.more-communities {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.more-communities:hover {
+  color: white;
+  border-color: #555;
+}
+
+
+/* =========================
+   DISCUSSIONS
+========================= */
+
+.discussion-content {
+  min-width: 0;
+}
+
+.discussion-header {
+  text-align: left;
+  margin-bottom: 35px;
+}
+
+.discussion-header h1 {
+  font-size: 42px;
+}
+
+.discussion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.discussion-card {
+  padding: 25px;
+  background: #151515;
+  border: 1px solid #303030;
+  border-radius: 14px;
+}
+
+.community-tag {
+  background: transparent;
+  border: none;
+  color: #999;
+  padding: 0;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.community-tag:hover {
+  color: white;
+}
+
+.discussion-card h2 {
+  font-size: 21px;
+  margin-bottom: 20px;
+}
+
+.discussion-meta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #777;
+  font-size: 14px;
+}
+
+.reply-count {
+  margin-left: auto;
+}
+
+
+/* =========================
+   MORE COMMUNITIES
+========================= */
+
+.more-communities-view h1 {
+  font-size: 42px;
+  margin: 15px 0;
+}
+
+.more-communities-view > p {
+  color: #999;
+  margin-bottom: 40px;
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+  padding: 60px;
+  text-align: center;
+  border: 1px solid #292929;
+  border-radius: 14px;
+}
+
+.empty-state h2 {
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+  color: #777;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+  .communities-page {
+    padding: 45px 20px;
+  }
+
+  .community-header h1 {
+    font-size: 44px;
+  }
+
+  .community-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .discussion-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .community-sidebar {
+    border-right: none;
+    border-bottom: 1px solid #292929;
+    padding-right: 0;
+    padding-bottom: 20px;
+  }
+
+  .discussion-card {
+    cursor: pointer;
+  }
+
+  .discussion-card:hover {
+    border-color: #555;
+  }
+
+}

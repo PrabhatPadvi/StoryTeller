@@ -1,0 +1,34 @@
+<main class="hero">
+
+  <div class="hero-content">
+
+    <p class="eyebrow">A place for human stories</p>
+
+    <h1>Everyone has a story.</h1>
+
+    <p class="description">
+      Share your dreams, experiences and thoughts.
+      Discover stories from people around the world.
+    </p>
+
+    <div class="buttons">
+
+      <button routerLink="/share">
+        Share Your Story
+      </button>
+
+      <button class="secondary" routerLink="/explore">
+        Explore Stories
+      </button>
+
+    </div>
+
+    @if (showStoryMessage()) {
+      <p class="story-message">
+        You are ready to share your story! ✨
+      </p>
+    }
+
+  </div>
+
+</main>

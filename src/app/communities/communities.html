@@ -1,0 +1,252 @@
+<div class="communities-page">
+
+  @if (joinedCommunities.length === 0) {
+
+    <!-- FIRST TIME / NO COMMUNITIES -->
+
+    <div class="community-header">
+
+      <span class="eyebrow">CONNECT</span>
+
+      <h1>Communities</h1>
+
+      <p>
+        Find people who share your interests.
+        Join conversations that matter to you.
+      </p>
+
+    </div>
+
+    <section class="discover-section">
+
+      <h2>Discover Communities</h2>
+
+      <div class="community-grid">
+
+        @for (community of communities; track community.id) {
+
+          <article class="community-card">
+
+            <div class="community-icon">
+              {{ community.icon }}
+            </div>
+
+            <h3>{{ community.name }}</h3>
+
+            <p class="description">
+              {{ community.description }}
+            </p>
+
+            <p class="members">
+              {{ community.members | number }} members
+            </p>
+
+            <button
+              class="join-button"
+              (click)="joinCommunity(community)"
+            >
+              Join
+            </button>
+
+          </article>
+
+        }
+
+      </div>
+
+    </section>
+
+  } @else {
+
+    <!-- USER HAS JOINED COMMUNITIES -->
+
+    <div class="discussion-layout">
+
+      <!-- SIDEBAR -->
+
+      <aside class="community-sidebar">
+
+        <h2>Your Communities</h2>
+
+        <button
+          class="community-nav"
+          [class.active]="selectedCommunityId === 0"
+          (click)="selectCommunity(0)"
+        >
+          <span>◉</span>
+          <span>All Discussions</span>
+        </button>
+
+        @for (community of joinedCommunities; track community.id) {
+
+          <button
+            class="community-nav"
+            [class.active]="selectedCommunityId === community.id"
+            (click)="selectCommunity(community.id)"
+          >
+            <span>{{ community.icon }}</span>
+            <span>{{ community.name }}</span>
+          </button>
+
+        }
+
+        <div class="sidebar-divider"></div>
+
+        <button
+          class="more-communities"
+          (click)="selectCommunity(-1)"
+        >
+          + Join More Communities
+        </button>
+
+      </aside>
+
+
+      <!-- MAIN DISCUSSION AREA -->
+
+      <main class="discussion-content">
+
+        @if (selectedCommunityId === -1) {
+
+          <div class="more-communities-view">
+
+            <span class="eyebrow">DISCOVER</span>
+
+            <h1>Join More Communities</h1>
+
+            <p>
+              Find new communities and join conversations
+              that interest you.
+            </p>
+
+            <div class="community-grid">
+
+              @for (community of communities; track community.id) {
+
+                @if (!community.joined) {
+
+                  <article class="community-card">
+
+                    <div class="community-icon">
+                      {{ community.icon }}
+                    </div>
+
+                    <h3>{{ community.name }}</h3>
+
+                    <p class="description">
+                      {{ community.description }}
+                    </p>
+
+                    <p class="members">
+                      {{ community.members | number }} members
+                    </p>
+
+                    <button
+                      class="join-button"
+                      (click)="joinCommunity(community)"
+                    >
+                      Join
+                    </button>
+
+                  </article>
+
+                }
+
+              }
+
+            </div>
+
+          </div>
+
+        } @else {
+
+          <div class="discussion-header">
+
+            <span class="eyebrow">COMMUNITIES</span>
+
+            <h1>
+              @if (selectedCommunityId === 0) {
+                All Discussions
+              } @else {
+                {{ getCommunity(selectedCommunityId)?.name }}
+              }
+            </h1>
+
+            <p>
+              @if (selectedCommunityId === 0) {
+                Discussions from all your communities.
+              } @else {
+                Discussions from this community.
+              }
+            </p>
+
+          </div>
+
+
+          <div class="discussion-list">
+
+            @for (discussion of visibleDiscussions; track discussion.id) {
+
+              <article class="discussion-card" routerLink="/discussion">
+
+                @if (getCommunity(discussion.communityId); as community) {
+
+                  <button
+                    class="community-tag"
+                    (click)="selectCommunity(community.id)"
+                  >
+                    {{ community.icon }}
+                    {{ community.name }}
+                  </button>
+
+                }
+
+                <h2>
+                  {{ discussion.title }}
+                </h2>
+
+                <div class="discussion-meta">
+
+                  <span>
+                    @{{ discussion.author }}
+                  </span>
+
+                  <span>·</span>
+
+                  <span>
+                    {{ discussion.time }}
+                  </span>
+
+                  <span class="reply-count">
+                    💬 {{ discussion.replies }} replies
+                  </span>
+
+                </div>
+
+              </article>
+
+            } @empty {
+
+              <div class="empty-state">
+
+                <h2>No discussions yet</h2>
+
+                <p>
+                  There aren't any discussions in this community yet.
+                </p>
+
+              </div>
+
+            }
+
+          </div>
+
+        }
+
+      </main>
+
+    </div>
+
+  }
+
+</div>

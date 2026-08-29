@@ -1,0 +1,102 @@
+<div class="create-page">
+
+  <div class="create-container">
+
+    <button
+      class="back-button"
+      routerLink="/communities">
+      ← Back to Communities
+    </button>
+
+    <div class="heading">
+
+      <span>COMMUNITIES</span>
+
+      <h1>Start a Discussion</h1>
+
+      <p>
+        Start a conversation and hear what other people think.
+      </p>
+
+    </div>
+
+
+    <form (ngSubmit)="publishDiscussion()">
+
+      <!-- COMMUNITY -->
+
+      <div class="form-group">
+
+        <label>
+          Community
+        </label>
+
+        <select
+          [(ngModel)]="selectedCommunity"
+          name="community">
+
+          @for (community of communities; track community.name) {
+
+            <option [value]="community.name">
+              {{ community.icon }} {{ community.name }}
+            </option>
+
+          }
+
+        </select>
+
+      </div>
+
+
+      <!-- TITLE -->
+
+      <div class="form-group">
+
+        <label>
+          Discussion Title
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="title"
+          name="title"
+          placeholder="What do you want to discuss?"
+          maxlength="150"
+        />
+
+      </div>
+
+
+      <!-- CONTENT -->
+
+      <div class="form-group">
+
+        <label>
+          Your Discussion
+        </label>
+
+        <textarea
+          [(ngModel)]="content"
+          name="content"
+          rows="8"
+          placeholder="Share your thoughts..."
+        ></textarea>
+
+      </div>
+
+
+      <!-- BUTTON -->
+
+      <button
+        class="publish-button"
+        type="submit">
+
+        Post Discussion
+
+      </button>
+
+    </form>
+
+  </div>
+
+</div>

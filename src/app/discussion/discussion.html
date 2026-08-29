@@ -1,0 +1,120 @@
+<button class="back-button" routerLink="/communities">
+  ← Back to Communities
+</button>
+
+<div class="discussion-page">
+
+  <div class="discussion-container">
+
+    <!-- DISCUSSION -->
+
+    <div class="discussion-header">
+
+      <span class="community-tag">
+        {{ discussion.icon }}
+        {{ discussion.community }}
+      </span>
+
+      <h1>
+        {{ discussion.title }}
+      </h1>
+
+      <p class="discussion-author">
+        @{{ discussion.author }} · {{ discussion.time }}
+      </p>
+
+    </div>
+
+
+    <!-- COMMENTS -->
+
+    <section class="comments">
+
+      <h2>
+        Discussion
+      </h2>
+
+      @for (comment of comments; track comment.id) {
+
+        <article class="comment">
+
+          <div class="comment-content">
+
+            <strong>
+              @{{ comment.author }}
+            </strong>
+
+            <p>
+              {{ comment.content }}
+            </p>
+
+            <button class="reply-button">
+              ↳ Reply
+            </button>
+
+          </div>
+
+
+          <!-- REPLIES -->
+
+          @if (comment.replies.length > 0) {
+
+            <div class="replies">
+
+              @for (reply of comment.replies; track reply.id) {
+
+                <div class="reply">
+
+                  <strong>
+                    @{{ reply.author }}
+                  </strong>
+
+                  <p>
+                    {{ reply.content }}
+                  </p>
+
+                  <button class="reply-button">
+                    ↳ Reply
+                  </button>
+
+                </div>
+
+              }
+
+            </div>
+
+          }
+
+        </article>
+
+      }
+
+    </section>
+
+
+    <!-- NEW COMMENT -->
+
+    <section class="write-comment">
+
+      <h2>
+        Join the discussion
+      </h2>
+
+      <textarea
+        [(ngModel)]="newComment"
+        placeholder="Write your comment..."
+        rows="5"
+      ></textarea>
+
+      <button
+        class="post-button"
+        (click)="addComment()"
+      >
+        Post Comment
+      </button>
+
+    </section>
+
+  </div>
+
+</div>

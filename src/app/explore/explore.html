@@ -1,0 +1,83 @@
+<div class="explore">
+
+  <section class="explore-header">
+
+    <p class="eyebrow">DISCOVER</p>
+
+    <h1>Explore Stories</h1>
+
+    <p class="subtitle">
+      Discover thoughts, dreams and experiences shared by people around the world.
+    </p>
+
+  </section>
+
+
+  <nav class="categories">
+
+  <button
+    [class.active]="selectedCategory === 'For You'"
+    (click)="selectCategory('For You')">
+    For You
+  </button>
+
+  <button
+    [class.active]="selectedCategory === 'Dream'"
+    (click)="selectCategory('Dream')">
+    Dreams
+  </button>
+
+  <button
+    [class.active]="selectedCategory === 'Real Life'"
+    (click)="selectCategory('Real Life')">
+    Real Life
+  </button>
+
+  <button
+    [class.active]="selectedCategory === 'Thought'"
+    (click)="selectCategory('Thought')">
+    Thoughts
+  </button>
+
+</nav>
+
+
+  <section class="stories">
+
+    @for (story of filteredStories; track story.title) {
+
+      <article class="story-card">
+
+        <div class="story-type">
+          {{ story.icon }} {{ story.type }}
+        </div>
+
+        <h2>
+          {{ story.title }}
+        </h2>
+
+        <p>
+          {{ story.content }}
+        </p>
+
+        <div class="story-footer">
+
+          <span>
+            {{ story.author }}
+          </span>
+
+          <div>
+            ♡ {{ story.likes }}
+            &nbsp;&nbsp;
+            💬 {{ story.comments }}
+          </div>
+
+        </div>
+
+      </article>
+
+    }
+
+  </section>
+
+</div>
