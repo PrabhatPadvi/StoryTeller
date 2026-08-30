@@ -1,303 +1,1663 @@
+/* =========================================================
+   COMMUNITIES PAGE
+========================================================= */
+
 .communities-page {
+
   max-width: 1200px;
+
   margin: 0 auto;
+
   padding: 70px 35px;
+
 }
 
 
-/* =========================
+/* =========================================================
    HEADERS
-========================= */
+========================================================= */
 
 .community-header,
 .discussion-header {
+
   text-align: center;
+
   margin-bottom: 55px;
+
 }
 
+
 .eyebrow {
+
   font-size: 11px;
+
   letter-spacing: 5px;
+
   color: #777;
+
 }
+
 
 .community-header h1,
 .discussion-header h1 {
+
   font-size: 58px;
+
   margin: 15px 0;
+
 }
+
 
 .community-header p,
 .discussion-header p {
+
   color: #999;
+
   font-size: 17px;
+
 }
 
 
-/* =========================
-   DISCOVER
-========================= */
+/* =========================================================
+   DISCOVER COMMUNITIES
+========================================================= */
 
 .discover-section h2 {
+
   font-size: 28px;
+
   margin-bottom: 28px;
+
 }
+
 
 .community-grid {
+
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
   gap: 22px;
+
 }
+
 
 .community-card {
+
   border: 1px solid #333;
+
   border-radius: 16px;
+
   padding: 30px;
+
   background: #151515;
+
 }
+
 
 .community-icon {
+
   font-size: 36px;
+
   margin-bottom: 18px;
+
 }
+
 
 .community-card h3 {
+
   font-size: 23px;
+
   margin-bottom: 12px;
+
 }
+
 
 .description {
+
   color: #999;
+
   line-height: 1.6;
+
 }
+
 
 .members {
+
   color: #777;
+
   font-size: 14px;
+
   margin: 20px 0;
+
 }
+
+
+/* =========================================================
+   JOIN BUTTON
+========================================================= */
 
 .join-button {
+
   width: 100%;
+
   padding: 13px;
+
   border-radius: 8px;
-  background: white;
-  color: black;
+
   border: none;
+
+  background: #ffffff;
+
+  color: #111111;
+
   cursor: pointer;
+
   font-size: 15px;
+
+  font-weight: 600;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.15s ease;
+
 }
+
 
 .join-button:hover {
+
   opacity: 0.85;
+
 }
 
 
-/* =========================
+.join-button:active {
+
+  transform: scale(0.98);
+
+}
+
+
+/* =========================================================
    DISCUSSION LAYOUT
-========================= */
+========================================================= */
 
 .discussion-layout {
+
   display: grid;
-  grid-template-columns: 260px 1fr;
+
+  grid-template-columns:
+    260px 1fr;
+
   gap: 45px;
+
 }
 
 
-/* =========================
+/* =========================================================
    SIDEBAR
-========================= */
+========================================================= */
 
 .community-sidebar {
+
   border-right: 1px solid #292929;
+
   padding-right: 25px;
+
 }
+
 
 .community-sidebar h2 {
+
   font-size: 18px;
+
   margin-bottom: 20px;
+
 }
+
 
 .community-nav {
+
   width: 100%;
+
   display: flex;
+
   align-items: center;
+
   gap: 10px;
+
   padding: 13px 12px;
+
   margin-bottom: 6px;
-  background: transparent;
+
+  background: transparent !important;
+
   border: none;
+
   border-radius: 8px;
+
   color: #999;
+
   text-align: left;
+
   cursor: pointer;
+
+  font-family: inherit;
+
   font-size: 14px;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+
 }
+
 
 .community-nav:hover {
-  background: #181818;
-  color: white;
+
+  background: #181818 !important;
+
+  color: #ffffff;
+
 }
+
 
 .community-nav.active {
-  background: #222;
-  color: white;
+
+  background: #222222 !important;
+
+  color: #ffffff;
+
 }
+
 
 .sidebar-divider {
+
   height: 1px;
+
   background: #292929;
+
   margin: 20px 0;
+
 }
+
 
 .more-communities {
+
   width: 100%;
+
   padding: 12px;
-  background: transparent;
+
+  background: transparent !important;
+
   border: 1px solid #333;
+
   border-radius: 8px;
+
   color: #aaa;
+
   cursor: pointer;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+
 }
+
 
 .more-communities:hover {
-  color: white;
+
+  color: #ffffff;
+
   border-color: #555;
+
+  background: #181818 !important;
+
 }
 
 
-/* =========================
-   DISCUSSIONS
-========================= */
+/* =========================================================
+   DISCUSSION CONTENT
+========================================================= */
 
 .discussion-content {
+
   min-width: 0;
+
 }
+
 
 .discussion-header {
+
   text-align: left;
+
   margin-bottom: 35px;
+
 }
+
 
 .discussion-header h1 {
+
   font-size: 42px;
+
 }
+
+
+/* =========================================================
+   DISCUSSION HEADER + START BUTTON
+========================================================= */
+
+.discussion-header-row {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-end;
+
+  gap: 30px;
+
+  margin-bottom: 40px;
+
+}
+
+
+.start-discussion-button {
+
+  flex-shrink: 0;
+
+  background: #ffffff !important;
+
+  color: #111111 !important;
+
+  border: none;
+
+  border-radius: 8px;
+
+  padding: 13px 20px;
+
+  font-family: inherit;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.15s ease;
+
+}
+
+
+.start-discussion-button:hover {
+
+  opacity: 0.85;
+
+}
+
+
+.start-discussion-button:active {
+
+  transform: scale(0.98);
+
+}
+
+
+/* =========================================================
+   DISCUSSION LIST
+========================================================= */
 
 .discussion-list {
+
   display: flex;
+
   flex-direction: column;
+
   gap: 16px;
+
 }
+
 
 .discussion-card {
+
   padding: 25px;
+
   background: #151515;
+
   border: 1px solid #303030;
+
   border-radius: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.15s ease;
+
 }
+
+
+.discussion-card:hover {
+
+  border-color: #444;
+
+  background: #171717;
+
+}
+
+
+/* =========================================================
+   COMMUNITY TAG
+========================================================= */
 
 .community-tag {
-  background: transparent;
+
+  background: transparent !important;
+
   border: none;
+
   color: #999;
+
   padding: 0;
-  cursor: pointer;
+
+  font-family: inherit;
+
   font-size: 14px;
+
   margin-bottom: 15px;
+
 }
 
-.community-tag:hover {
-  color: white;
-}
+
+/* =========================================================
+   DISCUSSION TITLE
+========================================================= */
 
 .discussion-card h2 {
+
   font-size: 21px;
+
   margin-bottom: 20px;
+
 }
+
+
+/* =========================================================
+   DISCUSSION META
+========================================================= */
 
 .discussion-meta {
+
   display: flex;
+
   align-items: center;
+
   gap: 9px;
+
   color: #777;
+
   font-size: 14px;
+
 }
 
-.reply-count {
+
+.discussion-meta .reply-count {
+
   margin-left: auto;
+
 }
 
 
-/* =========================
+/* =========================================================
+   DISCUSSION ACTIONS
+========================================================= */
+
+.discussion-actions {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 22px;
+
+  margin-top: 20px;
+
+  padding-top: 15px;
+
+  border-top: 1px solid #292929;
+
+}
+
+
+/* =========================================================
+   LIKE BUTTON
+========================================================= */
+
+.discussion-actions .like-button {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  background: transparent !important;
+
+  background-color: transparent !important;
+
+  border: none !important;
+
+  outline: none !important;
+
+  box-shadow: none !important;
+
+  color: #9b9b9b !important;
+
+  padding: 0 !important;
+
+  margin: 0 !important;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  cursor: pointer;
+
+  appearance: none;
+
+  -webkit-appearance: none;
+
+  transition:
+    color 0.2s ease,
+    transform 0.15s ease;
+
+}
+
+
+.discussion-actions .like-button:hover {
+
+  background: transparent !important;
+
+  background-color: transparent !important;
+
+  color: #ffffff !important;
+
+}
+
+
+.discussion-actions .like-button:active {
+
+  background: transparent !important;
+
+  background-color: transparent !important;
+
+  transform: scale(0.94);
+
+}
+
+
+.discussion-actions .like-button.liked {
+
+  background: transparent !important;
+
+  background-color: transparent !important;
+
+  color: #ff4d6d !important;
+
+}
+
+
+.discussion-actions .like-button.liked:hover {
+
+  color: #ff6b83 !important;
+
+}
+
+
+/* =========================================================
+   HEART
+========================================================= */
+
+.like-icon {
+
+  display: inline-block;
+
+  font-size: 19px;
+
+  line-height: 1;
+
+  transition:
+    transform 0.2s ease;
+
+}
+
+
+.like-button.liked .like-icon {
+
+  animation:
+    likePop 0.2s ease;
+
+}
+
+
+/* =========================================================
+   REPLY COUNT
+========================================================= */
+
+.discussion-actions .reply-count {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  margin: 0;
+
+  color: #9b9b9b;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+}
+
+
+/* =========================================================
+   ACTION LABEL
+========================================================= */
+
+.action-label {
+
+  margin-left: -2px;
+
+}
+
+
+/* =========================================================
+   REPORT BUTTON
+========================================================= */
+
+.report-discussion-button {
+
+  margin-left: auto;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent !important;
+
+  color: #777;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    transform 0.15s ease;
+
+}
+
+
+.report-discussion-button:hover {
+
+  color: #ffffff;
+
+}
+
+
+.report-discussion-button:active {
+
+  transform: scale(0.96);
+
+}
+
+
+/* =========================================================
+   LIKE ANIMATION
+========================================================= */
+
+@keyframes likePop {
+
+  0% {
+    transform: scale(0.8);
+  }
+
+  70% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+
+}
+
+
+/* =========================================================
    MORE COMMUNITIES
-========================= */
+========================================================= */
 
 .more-communities-view h1 {
+
   font-size: 42px;
+
   margin: 15px 0;
+
 }
+
 
 .more-communities-view > p {
+
   color: #999;
+
   margin-bottom: 40px;
+
 }
 
 
-/* =========================
+/* =========================================================
    EMPTY STATE
-========================= */
+========================================================= */
 
 .empty-state {
+
   padding: 60px;
+
   text-align: center;
+
   border: 1px solid #292929;
+
   border-radius: 14px;
+
 }
+
 
 .empty-state h2 {
+
   margin-bottom: 10px;
+
 }
+
 
 .empty-state p {
+
   color: #777;
+
 }
 
 
-/* =========================
+/* =========================================================
+   REPORT OVERLAY
+========================================================= */
+
+.report-overlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  background:
+    rgba(0, 0, 0, 0.72);
+
+  backdrop-filter:
+    blur(10px);
+
+  -webkit-backdrop-filter:
+    blur(10px);
+
+  animation:
+    reportOverlayIn 0.18s ease;
+
+}
+
+
+/* =========================================================
+   REPORT MODAL
+========================================================= */
+
+.report-modal {
+
+  width: min(100%, 500px);
+
+  max-height: calc(100vh - 40px);
+
+  overflow-y: auto;
+
+  background: #171717;
+
+  border: 1px solid #303030;
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.65);
+
+  animation:
+    reportModalIn 0.2s ease;
+
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+.report-modal-header {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 24px 24px 20px;
+
+  border-bottom: 1px solid #292929;
+
+}
+
+
+.report-modal-header h2 {
+
+  margin: 0 0 7px;
+
+  color: #f5f5f5;
+
+  font-size: 21px;
+
+  font-weight: 700;
+
+}
+
+
+.report-modal-header p {
+
+  margin: 0;
+
+  color: #858585;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.report-close-button {
+
+  flex-shrink: 0;
+
+  width: 32px;
+
+  height: 32px;
+
+  padding: 0;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: #888;
+
+  font-family: inherit;
+
+  font-size: 25px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+
+}
+
+
+.report-close-button:hover {
+
+  color: #ffffff;
+
+  background: #242424;
+
+}
+
+
+/* =========================================================
+   REPORTED DISCUSSION
+========================================================= */
+
+.reported-discussion {
+
+  margin: 20px 24px;
+
+  padding: 15px;
+
+  border: 1px solid #303030;
+
+  border-radius: 10px;
+
+  background: #111111;
+
+}
+
+
+.reported-author {
+
+  margin-bottom: 8px;
+
+  color: #f2f2f2;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+}
+
+
+.reported-title {
+
+  color: #aaa;
+
+  font-size: 14px;
+
+  line-height: 1.55;
+
+}
+
+
+/* =========================================================
+   REPORT REASONS
+========================================================= */
+
+.report-reasons {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+
+  padding: 0 24px;
+
+}
+
+
+.report-reason {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  min-height: 48px;
+
+  padding: 0 14px;
+
+  border: 1px solid transparent;
+
+  border-radius: 9px;
+
+  color: #aaa;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+
+}
+
+
+.report-reason:hover {
+
+  color: #ffffff;
+
+  background: #1e1e1e;
+
+}
+
+
+.report-reason.selected {
+
+  color: #ffffff;
+
+  background: #202020;
+
+  border-color: #393939;
+
+}
+
+
+.report-reason input {
+
+  width: 17px;
+
+  height: 17px;
+
+  margin: 0;
+
+  accent-color: #ffffff;
+
+  cursor: pointer;
+
+}
+
+
+/* =========================================================
+   OTHER REASON
+========================================================= */
+
+.other-reason-section {
+
+  padding: 18px 24px 0;
+
+}
+
+
+.other-reason-label {
+
+  display: block;
+
+  margin-bottom: 9px;
+
+  color: #c8c8c8;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+}
+
+
+.other-reason-input {
+
+  display: block;
+
+  width: 100%;
+
+  min-height: 110px;
+
+  box-sizing: border-box;
+
+  resize: vertical;
+
+  padding: 13px 14px;
+
+  border: 1px solid #383838;
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background: #111111;
+
+  color: #eeeeee;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+}
+
+
+.other-reason-input::placeholder {
+
+  color: #666;
+
+}
+
+
+.other-reason-input:focus {
+
+  border-color: #666;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(255, 255, 255, 0.04);
+
+}
+
+
+.character-count {
+
+  margin-top: 5px;
+
+  text-align: right;
+
+  color: #666;
+
+  font-size: 11px;
+
+}
+
+
+/* =========================================================
+   REPORT FOOTER
+========================================================= */
+
+.report-modal-footer {
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  margin-top: 20px;
+
+  padding: 16px 24px 20px;
+
+  border-top: 1px solid #292929;
+
+}
+
+
+.report-cancel-button,
+.report-submit-button {
+
+  padding: 11px 17px;
+
+  border-radius: 8px;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.15s ease;
+
+}
+
+
+.report-cancel-button {
+
+  border: 1px solid #353535;
+
+  background: transparent;
+
+  color: #999;
+
+}
+
+
+.report-cancel-button:hover {
+
+  background: #222222;
+
+  color: #ffffff;
+
+}
+
+
+.report-submit-button {
+
+  border: 1px solid #ffffff;
+
+  background: #ffffff;
+
+  color: #111111;
+
+}
+
+
+.report-submit-button:hover:not(:disabled) {
+
+  background: #e9e9e9;
+
+}
+
+
+.report-submit-button:active:not(:disabled),
+.report-cancel-button:active {
+
+  transform: scale(0.97);
+
+}
+
+
+.report-submit-button:disabled {
+
+  opacity: 0.35;
+
+  cursor: not-allowed;
+
+}
+
+
+/* =========================================================
+   SUCCESS TOAST
+========================================================= */
+
+.report-success-toast {
+
+  position: fixed;
+
+  right: 24px;
+
+  bottom: 24px;
+
+  z-index: 10000;
+
+  width: min(
+    calc(100vw - 48px),
+    390px
+  );
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 13px;
+
+  padding: 16px 17px;
+
+  background: #181818;
+
+  border: 1px solid #383838;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 18px 50px
+    rgba(0, 0, 0, 0.5);
+
+  animation:
+    successToastIn 0.3s ease;
+
+}
+
+
+/* =========================================================
+   SUCCESS ICON
+========================================================= */
+
+.success-icon {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 27px;
+
+  height: 27px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  color: #111111;
+
+  font-size: 16px;
+
+  font-weight: 800;
+
+}
+
+
+/* =========================================================
+   SUCCESS CONTENT
+========================================================= */
+
+.success-content {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+
+  min-width: 0;
+
+  padding-top: 1px;
+
+}
+
+
+.success-content strong {
+
+  color: #f5f5f5;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+}
+
+
+.success-content span {
+
+  color: #999;
+
+  font-size: 12px;
+
+  line-height: 1.45;
+
+}
+
+
+/* =========================================================
+   SUCCESS CLOSE
+========================================================= */
+
+.success-close {
+
+  flex-shrink: 0;
+
+  margin-left: auto;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: #777;
+
+  font-family: inherit;
+
+  font-size: 20px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease;
+
+}
+
+
+.success-close:hover {
+
+  color: #ffffff;
+
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes reportOverlayIn {
+
+  from {
+
+    opacity: 0;
+
+  }
+
+  to {
+
+    opacity: 1;
+
+  }
+
+}
+
+
+@keyframes reportModalIn {
+
+  from {
+
+    opacity: 0;
+
+    transform:
+      translateY(8px)
+      scale(0.98);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+  }
+
+}
+
+
+@keyframes successToastIn {
+
+  from {
+
+    opacity: 0;
+
+    transform:
+      translateY(12px)
+      translateX(10px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      translateX(0);
+
+  }
+
+}
+
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media (max-width: 800px) {
 
   .communities-page {
+
     padding: 45px 20px;
+
   }
+
 
   .community-header h1 {
+
     font-size: 44px;
+
   }
+
 
   .community-grid {
+
     grid-template-columns: 1fr;
+
   }
+
 
   .discussion-layout {
+
     grid-template-columns: 1fr;
+
   }
+
 
   .community-sidebar {
+
     border-right: none;
+
     border-bottom: 1px solid #292929;
+
     padding-right: 0;
+
     padding-bottom: 20px;
+
   }
+
 
   .discussion-card {
+
     cursor: pointer;
+
   }
 
+
   .discussion-card:hover {
-    border-color: #555;
+
+    border-color: #3a3a3a;
+
+  }
+
+
+  .discussion-header-row {
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 20px;
+
+  }
+
+
+  .start-discussion-button {
+
+    width: 100%;
+
+  }
+
+
+  .discussion-actions {
+
+    gap: 18px;
+
+  }
+
+
+  .report-modal {
+
+    width: 100%;
+
+    max-height:
+      calc(100vh - 24px);
+
+    border-radius: 13px;
+
+  }
+
+
+  .report-overlay {
+
+    padding: 12px;
+
+  }
+
+
+  .report-modal-header {
+
+    padding: 20px;
+
+  }
+
+
+  .reported-discussion {
+
+    margin-left: 20px;
+
+    margin-right: 20px;
+
+  }
+
+
+  .report-reasons {
+
+    padding-left: 20px;
+
+    padding-right: 20px;
+
+  }
+
+
+  .other-reason-section {
+
+    padding-left: 20px;
+
+    padding-right: 20px;
+
+  }
+
+
+  .report-modal-footer {
+
+    padding-left: 20px;
+
+    padding-right: 20px;
+
+  }
+
+
+  .report-success-toast {
+
+    right: 12px;
+
+    bottom: 12px;
+
+    width:
+      calc(100vw - 24px);
+
   }
 
 }

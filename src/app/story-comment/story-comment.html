@@ -1,0 +1,255 @@
+<div class="story-comment">
+
+  <!-- ======================================
+       AUTHOR
+  ====================================== -->
+
+  <div class="comment-author">
+
+    @{{ comment.author }}
+
+  </div>
+
+
+  <!-- ======================================
+       EDIT MODE
+  ====================================== -->
+
+  @if (isEditing) {
+
+    <div class="edit-comment-box">
+
+      <textarea
+        [(ngModel)]="editText"
+        class="edit-comment-input"
+        rows="2"
+        placeholder="Edit your comment..."
+      ></textarea>
+
+
+      <div class="edit-comment-actions">
+
+        <button
+          type="button"
+          class="edit-cancel"
+          (click)="cancelEdit()"
+        >
+          Cancel
+        </button>
+
+
+        <button
+          type="button"
+          class="edit-save"
+          (click)="saveEdit()"
+        >
+          Save
+        </button>
+
+      </div>
+
+    </div>
+
+  }
+
+
+  <!-- ======================================
+       NORMAL CONTENT
+  ====================================== -->
+
+  @else {
+
+    <p class="comment-text">
+
+      @if (comment.replyToAuthor) {
+
+        <span class="reply-mention">
+          @{{ comment.replyToAuthor }}
+        </span>
+
+      }
+
+      {{ comment.content }}
+
+    </p>
+
+
+    <!-- ======================================
+         ACTIONS
+    ====================================== -->
+
+    <div class="comment-actions">
+
+      <!-- ====================================
+           LIKE
+      ===================================== -->
+
+      <button
+        class="comment-action like-action"
+        [class.liked]="comment.liked"
+        (click)="toggleLike()"
+        type="button"
+      >
+
+        <span class="like-icon">
+          {{ comment.liked ? '♥' : '♡' }}
+        </span>
+
+        @if (comment.likes > 0) {
+
+          <span>
+            {{ comment.likes }}
+          </span>
+
+        }
+
+      </button>
+
+
+      <!-- ====================================
+           REPLY
+      ===================================== -->
+
+      <button
+        class="comment-action reply-action"
+        (click)="startReply()"
+        type="button"
+      >
+
+        Reply
+
+      </button>
+
+
+      <!-- ====================================
+           EDIT
+      ===================================== -->
+
+      @if (isOwnComment) {
+
+        <button
+          class="comment-action edit-action"
+          (click)="startEdit()"
+          type="button"
+        >
+
+          Edit
+
+        </button>
+
+      }
+
+
+      <!-- ====================================
+           DELETE
+      ===================================== -->
+
+      @if (isOwnComment) {
+
+        <button
+          class="comment-action delete-action"
+          (click)="deleteComment()"
+          type="button"
+        >
+
+          Delete
+
+        </button>
+
+      }
+
+
+      <!-- ====================================
+           REPORT
+      ===================================== -->
+
+      @if (!isOwnComment) {
+
+  <button
+    class="comment-action report-action"
+    (click)="reportComment()"
+    type="button"
+  >
+
+    Report
+
+  </button>
+
+}
+
+
+      <!-- ====================================
+           VIEW REPLIES
+      ===================================== -->
+
+      @if (comment.replies.length > 0) {
+
+        <button
+          class="comment-action replies-button"
+          (click)="toggleReplies()"
+          type="button"
+        >
+
+          @if (comment.repliesExpanded) {
+
+            Hide replies
+
+          } @else {
+
+            View
+            {{ comment.replies.length }}
+
+            {{ comment.replies.length === 1
+              ? 'reply'
+              : 'replies'
+            }}
+
+          }
+
+        </button>
+
+      }
+
+    </div>
+
+  }
+
+
+  <!-- ======================================
+       NESTED REPLIES
+  ====================================== -->
+
+  @if (
+    comment.repliesExpanded &&
+    comment.replies.length > 0
+  ) {
+
+    <div class="nested-replies">
+
+      @for (
+        reply of comment.replies;
+        track reply.id
+      ) {
+
+        <app-story-comment
+  [comment]="reply"
+
+  (like)="onChildLike($event)"
+
+  (reply)="onChildReply($event)"
+
+  (edit)="onChildEdit($event)"
+
+  (delete)="onChildDelete($event)"
+
+  (report)="onChildReport($event)"
+
+></app-story-comment>
+
+      }
+
+    </div>
+
+  }
+
+</div>

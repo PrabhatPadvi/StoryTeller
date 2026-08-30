@@ -1,0 +1,398 @@
+/* ==========================================
+   STORY COMMENT
+========================================== */
+
+.story-comment {
+
+  width: 100%;
+
+  padding: 18px 0;
+
+}
+
+
+/* ==========================================
+   AUTHOR
+========================================== */
+
+.comment-author {
+
+  color: #f5f5f5;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  margin-bottom: 8px;
+
+}
+
+
+/* ==========================================
+   COMMENT TEXT
+========================================== */
+
+.comment-text {
+
+  margin: 0;
+
+  color: #bdbdbd;
+
+  font-size: 15px;
+
+  line-height: 1.65;
+
+}
+
+
+/* ==========================================
+   REPLY MENTION
+========================================== */
+
+.comment-text .reply-mention {
+
+  color: #5531c3 !important;
+
+  font-weight: 500;
+
+  margin-right: 6px;
+
+}
+
+
+/* ==========================================
+   ACTIONS
+========================================== */
+
+.comment-actions {
+
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 15px;
+
+  margin-top: 10px;
+
+}
+
+
+/* ==========================================
+   ACTION BUTTONS
+========================================== */
+
+.comment-action {
+
+  appearance: none;
+
+  border: none;
+
+  background: transparent;
+
+  color: #777;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  padding: 0;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    transform 0.15s ease;
+
+}
+
+
+.comment-action:hover {
+
+  color: #ffffff;
+
+}
+
+
+.comment-action:active {
+
+  transform: scale(0.96);
+
+}
+
+
+/* ==========================================
+   LIKE
+========================================== */
+
+.like-action.liked {
+
+  color: #ff4d6d;
+
+}
+
+
+/* ==========================================
+   EDIT
+========================================== */
+
+.edit-action:hover {
+
+  color: #d6d6d6;
+
+}
+
+
+/* ==========================================
+   DELETE
+========================================== */
+
+.delete-action {
+
+  color: #777;
+
+}
+
+
+.delete-action:hover {
+
+  color: #ff5c5c;
+
+}
+
+
+/* ==========================================
+   REPLY
+========================================== */
+
+.reply-action:hover {
+
+  color: #ffffff;
+
+}
+
+
+/* ==========================================
+   REPORT
+========================================== */
+
+.report-action {
+
+  color: #777;
+
+}
+
+
+.report-action:hover {
+
+  color: #ffb4b4;
+
+}
+
+
+/* ==========================================
+   VIEW REPLIES
+========================================== */
+
+.replies-button {
+
+  color: #888;
+
+}
+
+
+.replies-button:hover {
+
+  color: #ffffff;
+
+}
+
+
+/* ==========================================
+   EDIT BOX
+========================================== */
+
+.edit-comment-box {
+
+  width: 100%;
+
+  margin-top: 4px;
+
+}
+
+
+.edit-comment-input {
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  resize: vertical;
+
+  min-height: 70px;
+
+  padding: 11px 13px;
+
+  border: 1px solid #333;
+
+  border-radius: 8px;
+
+  background: #111;
+
+  color: #eee;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  outline: none;
+
+}
+
+
+.edit-comment-input:focus {
+
+  border-color: #555;
+
+}
+
+
+/* ==========================================
+   EDIT ACTIONS
+========================================== */
+
+.edit-comment-actions {
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  margin-top: 9px;
+
+}
+
+
+.edit-cancel,
+.edit-save {
+
+  border: none;
+
+  border-radius: 7px;
+
+  padding: 7px 14px;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  cursor: pointer;
+
+}
+
+
+.edit-cancel {
+
+  background: transparent;
+
+  color: #888;
+
+}
+
+
+.edit-cancel:hover {
+
+  color: #fff;
+
+}
+
+
+.edit-save {
+
+  background: #f5f5f5;
+
+  color: #111;
+
+}
+
+
+.edit-save:hover {
+
+  background: #fff;
+
+}
+
+
+/* ==========================================
+   NESTED REPLIES
+========================================== */
+
+/*
+   Only the first reply level gets the
+   visual indentation.
+
+   Deeper replies stay aligned rather
+   than becoming extremely narrow.
+*/
+
+.nested-replies {
+
+  margin-top: 10px;
+
+  margin-left: 26px;
+
+  padding-left: 18px;
+
+  border-left: 1px solid #2b2b2b;
+
+}
+
+
+/*
+   Prevent endless horizontal indentation.
+*/
+
+.nested-replies .nested-replies {
+
+  margin-left: 0;
+
+  padding-left: 18px;
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 700px) {
+
+  .nested-replies {
+
+    margin-left: 12px;
+
+    padding-left: 12px;
+
+  }
+
+
+  .nested-replies .nested-replies {
+
+    margin-left: 0;
+
+    padding-left: 12px;
+
+  }
+
+
+  .comment-actions {
+
+    gap: 12px;
+
+  }
+
+}

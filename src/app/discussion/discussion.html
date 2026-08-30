@@ -1,120 +1,837 @@
-<button class="back-button" routerLink="/communities">
-  ← Back to Communities
-</button>
-
 <div class="discussion-page">
 
   <div class="discussion-container">
 
-    <!-- DISCUSSION -->
 
-    <div class="discussion-header">
+    <!-- ===================================== -->
+    <!-- BACK -->
+    <!-- ===================================== -->
 
-      <span class="community-tag">
-        {{ discussion.icon }}
-        {{ discussion.community }}
-      </span>
-
-      <h1>
-        {{ discussion.title }}
-      </h1>
-
-      <p class="discussion-author">
-        @{{ discussion.author }} · {{ discussion.time }}
-      </p>
-
-    </div>
+    <button
+      class="back-button"
+      type="button"
+      routerLink="/communities"
+    >
+      ← Back to Communities
+    </button>
 
 
-    <!-- COMMENTS -->
+    @if (discussion) {
 
-    <section class="comments">
 
-      <h2>
-        Discussion
-      </h2>
+      <!-- ===================================== -->
+      <!-- DISCUSSION HEADER -->
+      <!-- ===================================== -->
 
-      @for (comment of comments; track comment.id) {
+      <div class="discussion-header">
 
-        <article class="comment">
+        @if (getCommunity(); as community) {
 
-          <div class="comment-content">
+          <span class="community-tag">
 
-            <strong>
-              @{{ comment.author }}
-            </strong>
+            {{ community.icon }}
 
-            <p>
-              {{ comment.content }}
-            </p>
+            {{ community.name }}
 
-            <button class="reply-button">
-              ↳ Reply
-            </button>
+          </span>
+
+        }
+
+
+        <h1>
+          {{ discussion.title }}
+        </h1>
+
+
+        <p class="discussion-author">
+
+          @{{ discussion.author }}
+
+          ·
+
+          {{ discussion.time }}
+
+        </p>
+
+
+        @if (discussion.content) {
+
+          <p class="discussion-body">
+            {{ discussion.content }}
+          </p>
+
+        }
+
+
+        @if (discussion.hashtags?.length) {
+
+          <div class="hashtags">
+
+            @for (
+              tag of discussion.hashtags;
+              track tag
+            ) {
+
+              <span class="hashtag">
+                #{{ tag }}
+              </span>
+
+            }
 
           </div>
 
+        }
 
-          <!-- REPLIES -->
+      </div>
 
-          @if (comment.replies.length > 0) {
 
-            <div class="replies">
+      <!-- ===================================== -->
+      <!-- COMMENTS -->
+      <!-- ===================================== -->
 
-              @for (reply of comment.replies; track reply.id) {
+      <section class="comments">
 
-                <div class="reply">
+        <h2>
+          Discussion
+        </h2>
 
-                  <strong>
-                    @{{ reply.author }}
-                  </strong>
 
-                  <p>
-                    {{ reply.content }}
-                  </p>
+        @for (
+          comment of comments;
+          track comment.id
+        ) {
 
-                  <button class="reply-button">
-                    ↳ Reply
+
+          <!-- ================================= -->
+          <!-- TOP LEVEL COMMENT -->
+          <!-- ================================= -->
+
+          <article class="comment">
+
+
+            <!-- AUTHOR -->
+
+            <div class="comment-author">
+              @{{ comment.author }}
+            </div>
+
+
+            <!-- ================================= -->
+            <!-- EDIT MODE -->
+            <!-- ================================= -->
+
+            @if (editingComment?.id === comment.id) {
+
+              <div class="edit-box">
+
+                <textarea
+                  [(ngModel)]="editText"
+                  rows="3"
+                  class="edit-textarea"
+                  autofocus
+                ></textarea>
+
+
+                <div class="edit-actions">
+
+                  <button
+                    class="edit-save"
+                    type="button"
+                    [disabled]="!editText.trim()"
+                    (click)="saveEdit()"
+                  >
+                    Save
                   </button>
+
+
+                  <button
+                    class="edit-cancel"
+                    type="button"
+                    (click)="cancelEdit()"
+                  >
+                    Cancel
+                  </button>
+
+                </div>
+
+              </div>
+
+            }
+
+
+            <!-- ================================= -->
+            <!-- NORMAL CONTENT -->
+            <!-- ================================= -->
+
+            @else {
+
+              <p class="comment-text">
+
+                {{ comment.content }}
+
+              </p>
+
+            }
+
+
+            <!-- ================================= -->
+            <!-- COMMENT ACTIONS -->
+            <!-- ================================= -->
+
+            @if (editingComment?.id !== comment.id) {
+
+              <div class="comment-actions">
+
+
+                <!-- LIKE -->
+
+                <button
+                  class="like-button"
+                  type="button"
+                  [class.liked]="comment.liked"
+                  (click)="toggleLike(comment)"
+                >
+
+                  {{ comment.liked ? '♥' : '♡' }}
+
+                  @if (comment.likes > 0) {
+
+                    {{ comment.likes }}
+
+                  }
+
+                </button>
+
+
+                <!-- REPLY -->
+
+                <button
+                  class="reply-button"
+                  type="button"
+                  (click)="startReply(comment)"
+                >
+                  Reply
+                </button>
+
+
+                <!-- EDIT / DELETE -->
+
+                @if (isOwnComment(comment)) {
+
+                  <button
+                    class="edit-button"
+                    type="button"
+                    (click)="startEdit(comment)"
+                  >
+                    Edit
+                  </button>
+
+
+                  <button
+                    class="delete-button"
+                    type="button"
+                    (click)="deleteComment(comment)"
+                  >
+                    Delete
+                  </button>
+
+                }
+
+
+                <!-- REPORT -->
+
+                @if (!isOwnComment(comment)) {
+
+                  <button
+                    class="report-button"
+                    type="button"
+                    (click)="startReport(comment)"
+                  >
+                    Report
+                  </button>
+
+                }
+
+              </div>
+
+            }
+
+
+            <!-- ================================= -->
+            <!-- VIEW REPLIES -->
+            <!-- ================================= -->
+
+            @if (comment.replies.length > 0) {
+
+              <button
+                class="view-replies"
+                type="button"
+                (click)="toggleReplies(comment)"
+              >
+
+                @if (comment.repliesExpanded) {
+
+                  Hide replies
+
+                } @else {
+
+                  View
+                  {{ comment.replies.length }}
+
+                  {{
+                    comment.replies.length === 1
+                      ? 'reply'
+                      : 'replies'
+                  }}
+
+                }
+
+              </button>
+
+
+              <!-- ================================= -->
+              <!-- REPLY LIST -->
+              <!-- ================================= -->
+
+              @if (comment.repliesExpanded) {
+
+                <div class="reply-list">
+
+
+                  @for (
+                    reply of comment.replies;
+                    track reply.id
+                  ) {
+
+
+                    <!-- =========================== -->
+                    <!-- REPLY -->
+                    <!-- =========================== -->
+
+                    <div class="reply">
+
+
+                      <!-- REPLY AUTHOR -->
+
+                      <div class="reply-author">
+
+                        @{{ reply.author }}
+
+                      </div>
+
+
+                      <!-- =========================== -->
+                      <!-- EDIT REPLY -->
+                      <!-- =========================== -->
+
+                      @if (
+                        editingComment?.id === reply.id
+                      ) {
+
+                        <div class="edit-box">
+
+                          <textarea
+                            [(ngModel)]="editText"
+                            rows="3"
+                            class="edit-textarea"
+                            autofocus
+                          ></textarea>
+
+
+                          <div class="edit-actions">
+
+                            <button
+                              class="edit-save"
+                              type="button"
+                              [disabled]="!editText.trim()"
+                              (click)="saveEdit()"
+                            >
+                              Save
+                            </button>
+
+
+                            <button
+                              class="edit-cancel"
+                              type="button"
+                              (click)="cancelEdit()"
+                            >
+                              Cancel
+                            </button>
+
+                          </div>
+
+                        </div>
+
+                      }
+
+
+                      <!-- =========================== -->
+                      <!-- NORMAL REPLY CONTENT -->
+                      <!-- =========================== -->
+
+                      @else {
+
+                        <p class="reply-text">
+
+                          @if (reply.replyToAuthor) {
+
+                            <span class="reply-mention">
+                              @{{ reply.replyToAuthor }}
+                            </span>
+
+                          }
+
+                          {{ reply.content }}
+
+                        </p>
+
+                      }
+
+
+                      <!-- =========================== -->
+                      <!-- REPLY ACTIONS -->
+                      <!-- =========================== -->
+
+                      @if (
+                        editingComment?.id !== reply.id
+                      ) {
+
+                        <div class="comment-actions">
+
+
+                          <!-- LIKE -->
+
+                          <button
+                            class="like-button"
+                            type="button"
+                            [class.liked]="reply.liked"
+                            (click)="toggleLike(reply)"
+                          >
+
+                            {{ reply.liked ? '♥' : '♡' }}
+
+                            @if (reply.likes > 0) {
+
+                              {{ reply.likes }}
+
+                            }
+
+                          </button>
+
+
+                          <!-- REPLY -->
+
+                          <button
+                            class="reply-button"
+                            type="button"
+                            (click)="startReply(reply, comment)"
+                          >
+                            Reply
+                          </button>
+
+
+                          <!-- EDIT -->
+
+                          @if (isOwnComment(reply)) {
+
+                            <button
+                              class="edit-button"
+                              type="button"
+                              (click)="startEdit(reply)"
+                            >
+                              Edit
+                            </button>
+
+
+                            <!-- DELETE -->
+
+                            <button
+                              class="delete-button"
+                              type="button"
+                              (click)="deleteComment(reply)"
+                            >
+                              Delete
+                            </button>
+
+                          }
+
+
+                          <!-- REPORT -->
+
+                          @if (!isOwnComment(reply)) {
+
+                            <button
+                              class="report-button"
+                              type="button"
+                              (click)="startReport(reply)"
+                            >
+                              Report
+                            </button>
+
+                          }
+
+                        </div>
+
+                      }
+
+                    </div>
+
+                  }
 
                 </div>
 
               }
 
-            </div>
-
-          }
-
-        </article>
-
-      }
-
-    </section>
+            }
 
 
-    <!-- NEW COMMENT -->
+          </article>
 
-    <section class="write-comment">
+        }
 
-      <h2>
-        Join the discussion
-      </h2>
+      </section>
 
-      <textarea
-        [(ngModel)]="newComment"
-        placeholder="Write your comment..."
-        rows="5"
-      ></textarea>
-
-      <button
-        class="post-button"
-        (click)="addComment()"
-      >
-        Post Comment
-      </button>
-
-    </section>
+    }
 
   </div>
 
+
+  <!-- ======================================= -->
+  <!-- FIXED COMMENT / REPLY BOX -->
+  <!-- ======================================= -->
+
+  @if (discussion) {
+
+    <div class="fixed-comment-box">
+
+      <div class="fixed-comment-inner">
+
+
+        <!-- ================================= -->
+        <!-- REPLY TARGET -->
+        <!-- ================================= -->
+
+        @if (replyingToAuthor) {
+
+          <div class="replying-to">
+
+            <span>
+
+              Replying to
+
+              <strong>
+                @{{ replyingToAuthor }}
+              </strong>
+
+            </span>
+
+
+            <button
+              class="cancel-reply-target"
+              type="button"
+              (click)="cancelReply()"
+              aria-label="Cancel reply"
+            >
+              ×
+            </button>
+
+          </div>
+
+        }
+
+
+        <!-- ================================= -->
+        <!-- REPLY MODE -->
+        <!-- ================================= -->
+
+        @if (replyingToAuthor) {
+
+          <textarea
+            class="fixed-comment-input"
+            [(ngModel)]="replyText"
+            placeholder="Write your reply..."
+            rows="1"
+            (keydown.enter)="
+              $event.preventDefault();
+              postReply()
+            "
+          ></textarea>
+
+
+          <button
+            class="fixed-comment-button"
+            type="button"
+            [disabled]="!replyText.trim()"
+            (click)="postReply()"
+          >
+            Reply
+          </button>
+
+        }
+
+
+        <!-- ================================= -->
+        <!-- NORMAL COMMENT MODE -->
+        <!-- ================================= -->
+
+        @else {
+
+          <textarea
+            class="fixed-comment-input"
+            [(ngModel)]="newComment"
+            placeholder="Join the discussion..."
+            rows="1"
+            (keydown.enter)="
+              $event.preventDefault();
+              addComment()
+            "
+          ></textarea>
+
+
+          <button
+            class="fixed-comment-button"
+            type="button"
+            [disabled]="!newComment.trim()"
+            (click)="addComment()"
+          >
+            Post Comment
+          </button>
+
+        }
+
+      </div>
+
+    </div>
+
+  }
+
 </div>
+
+
+<!-- ========================================= -->
+<!-- REPORT MODAL -->
+<!-- ========================================= -->
+
+@if (reportingComment) {
+
+  <div
+    class="report-overlay"
+    (click)="cancelReport()"
+  >
+
+    <div
+      class="report-modal"
+      (click)="$event.stopPropagation()"
+    >
+
+
+      <!-- ===================================== -->
+      <!-- REPORT HEADER -->
+      <!-- ===================================== -->
+
+      <div class="report-header">
+
+        <div>
+
+          <h3>
+            Report comment
+          </h3>
+
+          <p>
+            Why are you reporting this comment?
+          </p>
+
+        </div>
+
+
+        <button
+          class="report-close"
+          type="button"
+          (click)="cancelReport()"
+          aria-label="Close report"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <!-- ===================================== -->
+      <!-- COMMENT PREVIEW -->
+      <!-- ===================================== -->
+
+      <div class="report-preview">
+
+        <strong>
+          @{{ reportingComment.author }}
+        </strong>
+
+        <p>
+          {{ reportingComment.content }}
+        </p>
+
+      </div>
+
+
+      <!-- ===================================== -->
+      <!-- REPORT REASONS -->
+      <!-- ===================================== -->
+
+      <div class="report-reasons">
+
+        @for (
+          reason of reportReasons;
+          track reason
+        ) {
+
+          <label
+            class="report-reason"
+            [class.selected]="reportReason === reason"
+          >
+
+            <input
+              type="radio"
+              name="reportReason"
+              [value]="reason"
+              [(ngModel)]="reportReason"
+            >
+
+            <span>
+              {{ reason }}
+            </span>
+
+          </label>
+
+        }
+
+
+        <!-- ===================================== -->
+        <!-- OTHER REASON -->
+        <!-- ===================================== -->
+
+        @if (reportReason === 'Other') {
+
+          <div class="report-other-box">
+
+            <label
+              for="reportDetails"
+              class="report-other-label"
+            >
+              Please specify the reason
+            </label>
+
+
+            <textarea
+              id="reportDetails"
+              class="report-other-input"
+              [(ngModel)]="reportDetails"
+              placeholder="Tell us why you are reporting this comment..."
+              rows="4"
+              maxlength="500"
+            ></textarea>
+
+
+            <div class="report-character-count">
+
+              {{ reportDetails.length }}/500
+
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+
+      <!-- ===================================== -->
+      <!-- REPORT ACTIONS -->
+      <!-- ===================================== -->
+
+      <div class="report-actions">
+
+        <button
+          class="report-cancel"
+          type="button"
+          (click)="cancelReport()"
+        >
+          Cancel
+        </button>
+
+
+        <button
+          class="report-submit"
+          type="button"
+          [disabled]="
+            !reportReason ||
+            (
+              reportReason === 'Other' &&
+              !reportDetails.trim()
+            )
+          "
+          (click)="submitReport()"
+        >
+          Submit Report
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+}
+
+
+<!-- ========================================= -->
+<!-- REPORT SUCCESS -->
+<!-- ========================================= -->
+
+@if (reportSuccess) {
+
+  <!-- BACKGROUND BLUR -->
+
+  <div
+    class="report-toast-backdrop"
+    aria-hidden="true"
+  ></div>
+
+
+  <!-- SUCCESS TOAST -->
+
+  <div
+    class="report-success-toast"
+    role="status"
+    aria-live="polite"
+  >
+
+    <div class="toast-success-icon">
+      ✓
+    </div>
+
+
+    <div class="toast-content">
+
+      <div class="toast-title">
+        Report submitted
+      </div>
+
+      <div class="toast-message">
+        Thank you for helping keep the community safe.
+      </div>
+
+    </div>
+
+
+    <button
+      class="report-success-close"
+      type="button"
+      (click)="closeReportSuccess()"
+      aria-label="Close notification"
+    >
+      ×
+    </button>
+
+  </div>
+
+}

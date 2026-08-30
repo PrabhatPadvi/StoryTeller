@@ -2,7 +2,9 @@
 
   @if (joinedCommunities.length === 0) {
 
-    <!-- FIRST TIME / NO COMMUNITIES -->
+    <!-- =========================================
+         FIRST TIME / NO COMMUNITIES
+    ========================================== -->
 
     <div class="community-header">
 
@@ -16,6 +18,7 @@
       </p>
 
     </div>
+
 
     <section class="discover-section">
 
@@ -31,7 +34,9 @@
               {{ community.icon }}
             </div>
 
-            <h3>{{ community.name }}</h3>
+            <h3>
+              {{ community.name }}
+            </h3>
 
             <p class="description">
               {{ community.description }}
@@ -44,6 +49,7 @@
             <button
               class="join-button"
               (click)="joinCommunity(community)"
+              type="button"
             >
               Join
             </button>
@@ -56,45 +62,76 @@
 
     </section>
 
+
   } @else {
 
-    <!-- USER HAS JOINED COMMUNITIES -->
+
+    <!-- =========================================
+         USER HAS JOINED COMMUNITIES
+    ========================================== -->
 
     <div class="discussion-layout">
 
-      <!-- SIDEBAR -->
+
+      <!-- =======================================
+           SIDEBAR
+      ======================================== -->
 
       <aside class="community-sidebar">
 
         <h2>Your Communities</h2>
 
+
         <button
           class="community-nav"
           [class.active]="selectedCommunityId === 0"
           (click)="selectCommunity(0)"
+          type="button"
         >
+
           <span>◉</span>
-          <span>All Discussions</span>
+
+          <span>
+            All Discussions
+          </span>
+
         </button>
 
-        @for (community of joinedCommunities; track community.id) {
+
+        @for (
+          community of joinedCommunities;
+          track community.id
+        ) {
 
           <button
             class="community-nav"
-            [class.active]="selectedCommunityId === community.id"
+            [class.active]="
+              selectedCommunityId === community.id
+            "
             (click)="selectCommunity(community.id)"
+            type="button"
           >
-            <span>{{ community.icon }}</span>
-            <span>{{ community.name }}</span>
+
+            <span>
+              {{ community.icon }}
+            </span>
+
+            <span>
+              {{ community.name }}
+            </span>
+
           </button>
 
         }
 
+
         <div class="sidebar-divider"></div>
+
 
         <button
           class="more-communities"
           (click)="selectCommunity(-1)"
+          type="button"
         >
           + Join More Communities
         </button>
@@ -102,26 +139,42 @@
       </aside>
 
 
-      <!-- MAIN DISCUSSION AREA -->
+
+      <!-- =======================================
+           MAIN DISCUSSION AREA
+      ======================================== -->
 
       <main class="discussion-content">
+
+
+        <!-- =====================================
+             JOIN MORE COMMUNITIES
+        ====================================== -->
 
         @if (selectedCommunityId === -1) {
 
           <div class="more-communities-view">
 
-            <span class="eyebrow">DISCOVER</span>
+            <span class="eyebrow">
+              DISCOVER
+            </span>
 
-            <h1>Join More Communities</h1>
+            <h1>
+              Join More Communities
+            </h1>
 
             <p>
               Find new communities and join conversations
               that interest you.
             </p>
 
+
             <div class="community-grid">
 
-              @for (community of communities; track community.id) {
+              @for (
+                community of communities;
+                track community.id
+              ) {
 
                 @if (!community.joined) {
 
@@ -131,7 +184,9 @@
                       {{ community.icon }}
                     </div>
 
-                    <h3>{{ community.name }}</h3>
+                    <h3>
+                      {{ community.name }}
+                    </h3>
 
                     <p class="description">
                       {{ community.description }}
@@ -144,6 +199,7 @@
                     <button
                       class="join-button"
                       (click)="joinCommunity(community)"
+                      type="button"
                     >
                       Join
                     </button>
@@ -158,52 +214,115 @@
 
           </div>
 
+
         } @else {
 
-          <div class="discussion-header">
 
-            <span class="eyebrow">COMMUNITIES</span>
+          <!-- ===================================
+               DISCUSSION HEADER
+          ==================================== -->
 
-            <h1>
-              @if (selectedCommunityId === 0) {
-                All Discussions
-              } @else {
-                {{ getCommunity(selectedCommunityId)?.name }}
-              }
-            </h1>
+          <div class="discussion-header-row">
 
-            <p>
-              @if (selectedCommunityId === 0) {
-                Discussions from all your communities.
-              } @else {
-                Discussions from this community.
-              }
-            </p>
+            <div class="discussion-header">
+
+              <span class="eyebrow">
+                COMMUNITIES
+              </span>
+
+              <h1>
+
+                @if (selectedCommunityId === 0) {
+
+                  All Discussions
+
+                } @else {
+
+                  {{ getCommunity(selectedCommunityId)?.name }}
+
+                }
+
+              </h1>
+
+              <p>
+
+                @if (selectedCommunityId === 0) {
+
+                  Discussions from all your communities.
+
+                } @else {
+
+                  Discussions from this community.
+
+                }
+
+              </p>
+
+            </div>
+
+
+            <button
+              class="start-discussion-button"
+              routerLink="/create-discussion"
+              type="button"
+            >
+              + Start a Discussion
+            </button>
 
           </div>
 
 
+
+          <!-- ===================================
+               DISCUSSION LIST
+          ==================================== -->
+
           <div class="discussion-list">
 
-            @for (discussion of visibleDiscussions; track discussion.id) {
+            @for (
+              discussion of visibleDiscussions;
+              track discussion.id
+            ) {
 
-              <article class="discussion-card" routerLink="/discussion">
 
-                @if (getCommunity(discussion.communityId); as community) {
+              <article
+                class="discussion-card"
+                (click)="openDiscussion(discussion.id)"
+              >
 
-                  <button
-                    class="community-tag"
-                    (click)="selectCommunity(community.id)"
-                  >
+
+                <!-- =============================
+                     COMMUNITY
+                ============================== -->
+
+                @if (
+                  getCommunity(discussion.communityId);
+                  as community
+                ) {
+
+                  <div class="community-tag">
+
                     {{ community.icon }}
+
                     {{ community.name }}
-                  </button>
+
+                  </div>
 
                 }
+
+
+                <!-- =============================
+                     TITLE
+                ============================== -->
 
                 <h2>
                   {{ discussion.title }}
                 </h2>
+
+
+                <!-- =============================
+                     AUTHOR / TIME
+                ============================== -->
 
                 <div class="discussion-meta">
 
@@ -211,15 +330,95 @@
                     @{{ discussion.author }}
                   </span>
 
-                  <span>·</span>
+                  <span>
+                    ·
+                  </span>
 
                   <span>
                     {{ discussion.time }}
                   </span>
 
+                </div>
+
+
+                <!-- =============================
+                     ACTIONS
+                ============================== -->
+
+                <div class="discussion-actions">
+
+
+                  <!-- LIKE -->
+
+                  <button
+                    class="like-button"
+                    [class.liked]="discussion.liked"
+                    (click)="
+                      toggleLike(discussion, $event)
+                    "
+                    type="button"
+                  >
+
+                    <span class="like-icon">
+
+                      {{
+                        discussion.liked
+                          ? '♥'
+                          : '♡'
+                      }}
+
+                    </span>
+
+                    <span>
+                      {{ discussion.likes }}
+                    </span>
+
+                    <span class="action-label">
+
+                      {{
+                        discussion.likes === 1
+                          ? 'like'
+                          : 'likes'
+                      }}
+
+                    </span>
+
+                  </button>
+
+
+
+                  <!-- REPLY COUNT -->
+
                   <span class="reply-count">
-                    💬 {{ discussion.replies }} replies
+
+                    💬
+
+                    {{ discussion.replies }}
+
+                    {{
+                      discussion.replies === 1
+                        ? 'reply'
+                        : 'replies'
+                    }}
+
                   </span>
+
+
+
+                  <!-- REPORT -->
+
+                  <button
+                    class="report-discussion-button"
+                    (click)="
+                      openReportModal(discussion, $event)
+                    "
+                    type="button"
+                  >
+
+                    Report
+
+                  </button>
+
 
                 </div>
 
@@ -227,12 +426,20 @@
 
             } @empty {
 
+
+              <!-- =================================
+                   EMPTY STATE
+              ================================== -->
+
               <div class="empty-state">
 
-                <h2>No discussions yet</h2>
+                <h2>
+                  No discussions yet
+                </h2>
 
                 <p>
-                  There aren't any discussions in this community yet.
+                  There aren't any discussions in
+                  this community yet.
                 </p>
 
               </div>
@@ -244,6 +451,354 @@
         }
 
       </main>
+
+    </div>
+
+  }
+
+
+  <!-- =================================================
+       REPORT MODAL
+  ================================================== -->
+
+  @if (reportModalOpen) {
+
+    <div
+      class="report-overlay"
+      (click)="closeReportModal()"
+    >
+
+      <div
+        class="report-modal"
+        (click)="$event.stopPropagation()"
+      >
+
+
+        <!-- =========================================
+             MODAL HEADER
+        ========================================== -->
+
+        <div class="report-modal-header">
+
+          <div>
+
+            <h2>
+              Report discussion
+            </h2>
+
+            <p>
+              Why are you reporting this discussion?
+            </p>
+
+          </div>
+
+
+          <button
+            class="report-close-button"
+            type="button"
+            (click)="closeReportModal()"
+            aria-label="Close report"
+          >
+            ×
+          </button>
+
+        </div>
+
+
+
+        <!-- =========================================
+             REPORTED DISCUSSION PREVIEW
+        ========================================== -->
+
+        @if (reportingDiscussion) {
+
+          <div class="reported-discussion">
+
+            <div class="reported-author">
+
+              @{{ reportingDiscussion.author }}
+
+            </div>
+
+            <div class="reported-title">
+
+              {{ reportingDiscussion.title }}
+
+            </div>
+
+          </div>
+
+        }
+
+
+
+        <!-- =========================================
+             REPORT REASONS
+        ========================================== -->
+
+        <div class="report-reasons">
+
+
+          <!-- SPAM -->
+
+          <label
+            class="report-reason"
+            [class.selected]="
+              selectedReportReason === 'Spam'
+            "
+          >
+
+            <input
+              type="radio"
+              name="discussionReportReason"
+              value="Spam"
+              [checked]="
+                selectedReportReason === 'Spam'
+              "
+              (change)="
+                selectReportReason('Spam')
+              "
+            >
+
+            <span>
+              Spam
+            </span>
+
+          </label>
+
+
+
+          <!-- HARASSMENT -->
+
+          <label
+            class="report-reason"
+            [class.selected]="
+              selectedReportReason ===
+              'Harassment or bullying'
+            "
+          >
+
+            <input
+              type="radio"
+              name="discussionReportReason"
+              value="Harassment or bullying"
+              [checked]="
+                selectedReportReason ===
+                'Harassment or bullying'
+              "
+              (change)="
+                selectReportReason(
+                  'Harassment or bullying'
+                )
+              "
+            >
+
+            <span>
+              Harassment or bullying
+            </span>
+
+          </label>
+
+
+
+          <!-- HATE SPEECH -->
+
+          <label
+            class="report-reason"
+            [class.selected]="
+              selectedReportReason === 'Hate speech'
+            "
+          >
+
+            <input
+              type="radio"
+              name="discussionReportReason"
+              value="Hate speech"
+              [checked]="
+                selectedReportReason === 'Hate speech'
+              "
+              (change)="
+                selectReportReason('Hate speech')
+              "
+            >
+
+            <span>
+              Hate speech
+            </span>
+
+          </label>
+
+
+
+          <!-- INAPPROPRIATE -->
+
+          <label
+            class="report-reason"
+            [class.selected]="
+              selectedReportReason ===
+              'Inappropriate content'
+            "
+          >
+
+            <input
+              type="radio"
+              name="discussionReportReason"
+              value="Inappropriate content"
+              [checked]="
+                selectedReportReason ===
+                'Inappropriate content'
+              "
+              (change)="
+                selectReportReason(
+                  'Inappropriate content'
+                )
+              "
+            >
+
+            <span>
+              Inappropriate content
+            </span>
+
+          </label>
+
+
+
+          <!-- OTHER -->
+
+          <label
+            class="report-reason"
+            [class.selected]="
+              selectedReportReason === 'Other'
+            "
+          >
+
+            <input
+              type="radio"
+              name="discussionReportReason"
+              value="Other"
+              [checked]="
+                selectedReportReason === 'Other'
+              "
+              (change)="
+                selectReportReason('Other')
+              "
+            >
+
+            <span>
+              Other
+            </span>
+
+          </label>
+
+        </div>
+
+
+
+        <!-- =========================================
+             OTHER REASON
+        ========================================== -->
+
+        @if (selectedReportReason === 'Other') {
+
+          <div class="other-reason-section">
+
+            <label
+              for="discussionOtherReason"
+              class="other-reason-label"
+            >
+              Please specify the reason
+            </label>
+
+
+            <textarea
+              id="discussionOtherReason"
+              class="other-reason-input"
+              [(ngModel)]="reportOtherReason"
+              maxlength="500"
+              rows="4"
+              placeholder="Tell us why you are reporting this discussion..."
+            ></textarea>
+
+
+            <div class="character-count">
+
+              {{ reportOtherReason.length }}/500
+
+            </div>
+
+          </div>
+
+        }
+
+
+
+        <!-- =========================================
+             MODAL FOOTER
+        ========================================== -->
+
+        <div class="report-modal-footer">
+
+          <button
+            class="report-cancel-button"
+            type="button"
+            (click)="closeReportModal()"
+          >
+            Cancel
+          </button>
+
+
+          <button
+            class="report-submit-button"
+            type="button"
+            [disabled]="!canSubmitReport()"
+            (click)="submitReport()"
+          >
+            Submit Report
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+
+
+  <!-- =================================================
+       REPORT SUCCESS TOAST
+  ================================================== -->
+
+  @if (reportSuccess) {
+
+    <div class="report-success-toast">
+
+      <div class="success-icon">
+        ✓
+      </div>
+
+      <div class="success-content">
+
+        <strong>
+          Report submitted
+        </strong>
+
+        <span>
+          Thank you for helping keep the community safe.
+        </span>
+
+      </div>
+
+
+      <button
+        class="success-close"
+        type="button"
+        (click)="closeReportSuccess()"
+        aria-label="Close notification"
+      >
+        ×
+      </button>
 
     </div>
 

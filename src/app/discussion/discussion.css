@@ -1,169 +1,1777 @@
+/* =========================================
+   DISCUSSION PAGE
+========================================= */
+
 .discussion-page {
-  min-height: calc(100vh - 70px);
-  padding: 60px 20px;
+
+  min-height: 100vh;
+
+  background: #0f0f0f;
+
+  color: #f5f5f5;
+
+  padding-bottom: 110px;
+
 }
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
 
 .discussion-container {
-  max-width: 800px;
+
+  width: min(1000px, calc(100% - 40px));
+
   margin: 0 auto;
+
+  padding: 30px 0 60px;
+
 }
 
 
-/* =========================
-   DISCUSSION HEADER
-========================= */
-
-.discussion-header {
-  padding-bottom: 35px;
-  border-bottom: 1px solid #292929;
-}
-
-.community-tag {
-  color: #999;
-  font-size: 14px;
-}
-
-.discussion-header h1 {
-  font-size: 36px;
-  line-height: 1.3;
-  margin: 18px 0;
-}
-
-.discussion-author {
-  color: #777;
-  font-size: 14px;
-}
-
-
-/* =========================
-   COMMENTS
-========================= */
-
-.comments {
-  padding-top: 35px;
-}
-
-.comments h2,
-.write-comment h2 {
-  font-size: 20px;
-  margin-bottom: 25px;
-}
-
-.comment {
-  padding: 20px 0;
-  border-bottom: 1px solid #242424;
-}
-
-.comment-content {
-  padding-left: 0;
-}
-
-.comment strong,
-.reply strong {
-  font-size: 14px;
-  color: #ddd;
-}
-
-.comment p,
-.reply p {
-  color: #999;
-  line-height: 1.6;
-  margin: 8px 0;
-}
-
-.reply-button {
-  border: none;
-  background: transparent;
-  color: #777;
-  cursor: pointer;
-  padding: 5px 0;
-}
-
-.reply-button:hover {
-  color: white;
-}
-
-
-/* =========================
-   REPLIES
-========================= */
-
-.replies {
-  margin-left: 35px;
-  margin-top: 15px;
-  padding-left: 20px;
-  border-left: 1px solid #333;
-}
-
-.reply {
-  padding: 15px 0;
-}
-
-
-/* =========================
-   WRITE COMMENT
-========================= */
-
-.write-comment {
-  margin-top: 45px;
-  padding-top: 30px;
-  border-top: 1px solid #292929;
-}
-
-.write-comment textarea {
-  width: 100%;
-  box-sizing: border-box;
-  resize: vertical;
-  background: #151515;
-  border: 1px solid #333;
-  border-radius: 10px;
-  padding: 15px;
-  color: #f5f5f5;
-  font-family: inherit;
-  font-size: 15px;
-  outline: none;
-}
-
-.write-comment textarea:focus {
-  border-color: #555;
-}
-
-.post-button {
-  margin-top: 12px;
-  padding: 12px 22px;
-  background: white;
-  color: black;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.post-button:hover {
-  opacity: 0.85;
-}
+/* =========================================
+   BACK BUTTON
+========================================= */
 
 .back-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
 
-  background: transparent;
-  border: 1px solid #2f2f2f;
+  appearance: none;
+
+  border: 1px solid #303030;
+
+  background: #181818;
+
+  color: #aaa;
+
   border-radius: 8px;
 
-  color: #999;
-  font-size: 14px;
-  padding: 9px 14px;
+  padding: 8px 13px;
+
+  font-family: inherit;
+
+  font-size: 13px;
 
   cursor: pointer;
-  transition: all 0.2s ease;
 
-  margin-bottom: 25px;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+
 }
+
 
 .back-button:hover {
+
+  background: #222;
+
   color: #fff;
-  border-color: #555;
-  background: #171717;
+
+  border-color: #444;
+
 }
 
+
+/* =========================================
+   DISCUSSION HEADER
+========================================= */
+
+.discussion-header {
+
+  padding: 28px 0 32px;
+
+  border-bottom: 1px solid #292929;
+
+}
+
+
+/* =========================================
+   COMMUNITY TAG
+========================================= */
+
+.community-tag {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  color: #999;
+
+  font-size: 14px;
+
+  margin-bottom: 17px;
+
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.discussion-header h1 {
+
+  margin: 0;
+
+  color: #f5f5f5;
+
+  font-size: clamp(28px, 4vw, 42px);
+
+  line-height: 1.15;
+
+  font-weight: 700;
+
+  letter-spacing: -0.7px;
+
+}
+
+
+/* =========================================
+   AUTHOR / TIME
+========================================= */
+
+.discussion-author {
+
+  margin: 14px 0 0;
+
+  color: #888;
+
+  font-size: 14px;
+
+}
+
+
+/* =========================================
+   DISCUSSION BODY
+========================================= */
+
+.discussion-body {
+
+  margin: 25px 0 0;
+
+  max-width: 850px;
+
+  color: #c5c5c5;
+
+  font-size: 16px;
+
+  line-height: 1.75;
+
+}
+
+
+/* =========================================
+   HASHTAGS
+========================================= */
+
+.hashtags {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 9px;
+
+  margin-top: 20px;
+
+}
+
+
+.hashtag {
+
+  color: #8d8d8d;
+
+  font-size: 13px;
+
+}
+
+
+/* =========================================
+   COMMENTS SECTION
+========================================= */
+
+.comments {
+
+  padding: 34px 0 30px;
+
+}
+
+
+.comments h2 {
+
+  margin: 0 0 30px;
+
+  color: #f5f5f5;
+
+  font-size: 25px;
+
+  font-weight: 650;
+
+}
+
+
+/* =========================================
+   TOP LEVEL COMMENT
+========================================= */
+
+.comment {
+
+  padding: 0 0 28px;
+
+  margin-bottom: 28px;
+
+  border-bottom: 1px solid #252525;
+
+}
+
+
+/* =========================================
+   COMMENT AUTHOR
+========================================= */
+
+.comment-author {
+
+  color: #f1f1f1;
+
+  font-size: 15px;
+
+  font-weight: 650;
+
+  margin-bottom: 9px;
+
+}
+
+
+/* =========================================
+   COMMENT TEXT
+========================================= */
+
+.comment-text,
+.reply-text {
+
+  margin: 0;
+
+  color: #c8c8c8;
+
+  font-size: 15px;
+
+  line-height: 1.7;
+
+  word-break: break-word;
+
+}
+
+
+/* =========================================
+   COMMENT ACTIONS
+========================================= */
+
+.comment-actions {
+
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 15px;
+
+  margin-top: 10px;
+
+}
+
+
+/* =========================================
+   ACTION BUTTONS
+========================================= */
+
+.like-button,
+.reply-button,
+.edit-button,
+.delete-button,
+.report-button,
+.view-replies {
+
+  appearance: none;
+
+  border: none;
+
+  background: transparent;
+
+  padding: 0;
+
+  color: #777;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    transform 0.15s ease;
+
+}
+
+
+.like-button:hover,
+.reply-button:hover,
+.edit-button:hover,
+.view-replies:hover {
+
+  color: #fff;
+
+}
+
+
+.like-button:active,
+.reply-button:active,
+.edit-button:active,
+.delete-button:active,
+.report-button:active {
+
+  transform: scale(0.96);
+
+}
+
+
+/* =========================================
+   LIKED
+========================================= */
+
+.like-button.liked {
+
+  color: #ff4d6d;
+
+}
+
+
+/* =========================================
+   DELETE
+========================================= */
+
+.delete-button:hover {
+
+  color: #ff6b6b;
+
+}
+
+
+/* =========================================
+   REPORT
+========================================= */
+
+.report-button:hover {
+
+  color: #ff6b6b;
+
+}
+
+
+/* =========================================
+   VIEW REPLIES
+========================================= */
+
+.view-replies {
+
+  display: block;
+
+  margin-top: 10px;
+
+  color: #888;
+
+}
+
+
+.view-replies:hover {
+
+  color: #fff;
+
+}
+
+
+/* =========================================
+   REPLY LIST
+========================================= */
+
+.reply-list {
+
+  margin-top: 14px;
+
+  margin-left: 27px;
+
+  padding-left: 20px;
+
+  border-left: 1px solid #292929;
+
+}
+
+
+/* =========================================
+   INDIVIDUAL REPLY
+========================================= */
+
+.reply {
+
+  padding: 3px 0 24px;
+
+}
+
+
+/* =========================================
+   REPLY AUTHOR
+========================================= */
+
+.reply-author {
+
+  color: #f1f1f1;
+
+  font-size: 15px;
+
+  font-weight: 650;
+
+  margin-bottom: 8px;
+
+}
+
+
+/* =========================================
+   REPLY MENTION
+========================================= */
+
+.reply-mention {
+
+  color: #9d9dff;
+
+  margin-right: 7px;
+
+  font-weight: 500;
+
+}
+
+
+/* =========================================
+   EDIT BOX
+========================================= */
+
+.edit-box {
+
+  margin-top: 10px;
+
+  max-width: 760px;
+
+}
+
+
+/* =========================================
+   EDIT TEXTAREA
+========================================= */
+
+.edit-textarea {
+
+  width: 100%;
+
+  min-height: 80px;
+
+  box-sizing: border-box;
+
+  resize: vertical;
+
+  padding: 12px 13px;
+
+  border: 1px solid #353535;
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background: #151515;
+
+  color: #eee;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  line-height: 1.55;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+
+}
+
+
+.edit-textarea:focus {
+
+  border-color: #555;
+
+  background: #181818;
+
+}
+
+
+.edit-textarea::placeholder {
+
+  color: #666;
+
+}
+
+
+/* =========================================
+   EDIT ACTIONS
+========================================= */
+
+.edit-actions {
+
+  display: flex;
+
+  gap: 9px;
+
+  margin-top: 9px;
+
+}
+
+
+/* =========================================
+   EDIT SAVE / CANCEL
+========================================= */
+
+.edit-save,
+.edit-cancel {
+
+  border-radius: 7px;
+
+  padding: 8px 14px;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+
+}
+
+
+.edit-save {
+
+  border: none;
+
+  background: #f5f5f5;
+
+  color: #111;
+
+  font-weight: 600;
+
+}
+
+
+.edit-save:hover {
+
+  background: #ddd;
+
+}
+
+
+.edit-save:disabled {
+
+  opacity: 0.4;
+
+  cursor: not-allowed;
+
+}
+
+
+.edit-cancel {
+
+  border: 1px solid #363636;
+
+  background: transparent;
+
+  color: #999;
+
+}
+
+
+.edit-cancel:hover {
+
+  color: #fff;
+
+  border-color: #555;
+
+}
+
+
+/* =========================================
+   FIXED COMMENT BOX
+========================================= */
+
+.fixed-comment-box {
+
+  position: fixed;
+
+  left: 0;
+
+  right: 0;
+
+  bottom: 0;
+
+  z-index: 1000;
+
+  padding: 13px 20px;
+
+  background: rgba(15, 15, 15, 0.94);
+
+  border-top: 1px solid #292929;
+
+  backdrop-filter: blur(12px);
+
+}
+
+
+/* =========================================
+   FIXED COMMENT INNER
+========================================= */
+
+.fixed-comment-inner {
+
+  width: min(1000px, 100%);
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: 1fr auto;
+
+  gap: 12px;
+
+  align-items: end;
+
+}
+
+
+/* =========================================
+   REPLY TARGET
+========================================= */
+
+.replying-to {
+
+  grid-column: 1 / -1;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 9px 12px;
+
+  border: 1px solid #2e2e2e;
+
+  border-radius: 8px;
+
+  background: #171717;
+
+  color: #888;
+
+  font-size: 13px;
+
+}
+
+
+.replying-to strong {
+
+  color: #ddd;
+
+}
+
+
+/* =========================================
+   CANCEL REPLY
+========================================= */
+
+.cancel-reply-target {
+
+  width: 25px;
+
+  height: 25px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: #888;
+
+  font-size: 20px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+}
+
+
+.cancel-reply-target:hover {
+
+  background: #252525;
+
+  color: #fff;
+
+}
+
+
+/* =========================================
+   FIXED INPUT
+========================================= */
+
+.fixed-comment-input {
+
+  width: 100%;
+
+  min-height: 42px;
+
+  max-height: 140px;
+
+  box-sizing: border-box;
+
+  resize: vertical;
+
+  padding: 11px 13px;
+
+  border: 1px solid #353535;
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background: #151515;
+
+  color: #eee;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+}
+
+
+.fixed-comment-input:focus {
+
+  border-color: #555;
+
+  background: #181818;
+
+}
+
+
+.fixed-comment-input::placeholder {
+
+  color: #666;
+
+}
+
+
+/* =========================================
+   FIXED COMMENT BUTTON
+========================================= */
+
+.fixed-comment-button {
+
+  min-height: 42px;
+
+  padding: 0 18px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #f5f5f5;
+
+  color: #111;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+}
+
+
+.fixed-comment-button:hover:not(:disabled) {
+
+  background: #ddd;
+
+}
+
+
+.fixed-comment-button:active:not(:disabled) {
+
+  transform: scale(0.97);
+
+}
+
+
+.fixed-comment-button:disabled {
+
+  opacity: 0.4;
+
+  cursor: not-allowed;
+
+}
+
+
+/* =========================================================
+   REPORT OVERLAY
+========================================================= */
+
+.report-overlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 5000;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  background: rgba(0, 0, 0, 0.72);
+
+  backdrop-filter: blur(6px);
+
+  -webkit-backdrop-filter: blur(6px);
+
+}
+
+
+/* =========================================================
+   REPORT MODAL
+========================================================= */
+
+.report-modal {
+
+  width: min(470px, 100%);
+
+  max-height: calc(100vh - 40px);
+
+  display: flex;
+
+  flex-direction: column;
+
+  background: #171717;
+
+  border: 1px solid #333;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.65);
+
+  overflow: hidden;
+
+}
+
+
+/* =========================================================
+   REPORT HEADER
+========================================================= */
+
+.report-header {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 22px;
+
+  border-bottom: 1px solid #292929;
+
+}
+
+
+.report-header h3 {
+
+  margin: 0;
+
+  color: #f5f5f5;
+
+  font-size: 20px;
+
+  font-weight: 600;
+
+}
+
+
+.report-header p {
+
+  margin: 6px 0 0;
+
+  color: #888;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+}
+
+
+/* =========================================================
+   REPORT CLOSE
+========================================================= */
+
+.report-close {
+
+  width: 32px;
+
+  height: 32px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #888;
+
+  font-size: 24px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+}
+
+
+.report-close:hover {
+
+  background: #252525;
+
+  color: #fff;
+
+}
+
+
+/* =========================================================
+   REPORT PREVIEW
+========================================================= */
+
+.report-preview {
+
+  margin: 18px 22px;
+
+  padding: 14px 15px;
+
+  background: #111;
+
+  border: 1px solid #292929;
+
+  border-radius: 9px;
+
+}
+
+
+.report-preview strong {
+
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #f5f5f5;
+
+  font-size: 14px;
+
+}
+
+
+.report-preview p {
+
+  margin: 0;
+
+  color: #aaa;
+
+  font-size: 14px;
+
+  line-height: 1.55;
+
+  word-break: break-word;
+
+}
+
+
+/* =========================================================
+   REPORT REASONS
+========================================================= */
+
+.report-reasons {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+
+  padding: 0 22px 20px;
+
+  overflow-y: auto;
+
+}
+
+
+.report-reason {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 12px 13px;
+
+  border: 1px solid transparent;
+
+  border-radius: 8px;
+
+  color: #aaa;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+
+}
+
+
+.report-reason:hover {
+
+  background: #202020;
+
+  color: #eee;
+
+}
+
+
+.report-reason.selected {
+
+  background: #202020;
+
+  border-color: #454545;
+
+  color: #fff;
+
+}
+
+
+.report-reason input {
+
+  width: 16px;
+
+  height: 16px;
+
+  margin: 0;
+
+  flex-shrink: 0;
+
+  accent-color: #f5f5f5;
+
+}
+
+
+/* =========================================================
+   OTHER REASON
+========================================================= */
+
+.report-other-box {
+
+  width: 100%;
+
+  margin-top: 8px;
+
+  box-sizing: border-box;
+
+}
+
+
+.report-other-label {
+
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #d0d0d0;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  line-height: 1.4;
+
+}
+
+
+.report-other-input {
+
+  display: block;
+
+  width: 100%;
+
+  min-height: 100px;
+
+  max-height: 180px;
+
+  box-sizing: border-box;
+
+  padding: 12px 13px;
+
+  resize: vertical;
+
+  background: #111;
+
+  border: 1px solid #292929;
+
+  border-radius: 9px;
+
+  outline: none;
+
+  color: #f5f5f5;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+
+}
+
+
+.report-other-input::placeholder {
+
+  color: #666;
+
+}
+
+
+.report-other-input:hover {
+
+  border-color: #383838;
+
+}
+
+
+.report-other-input:focus {
+
+  border-color: #555;
+
+  background: #151515;
+
+}
+
+
+/* =========================================================
+   CHARACTER COUNT
+========================================================= */
+
+.report-character-count {
+
+  display: block;
+
+  width: 100%;
+
+  margin-top: 6px;
+
+  box-sizing: border-box;
+
+  text-align: right;
+
+  color: #666;
+
+  font-size: 11px;
+
+  line-height: 1.2;
+
+}
+
+
+/* =========================================================
+   REPORT ACTIONS
+========================================================= */
+
+.report-actions {
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 9px;
+
+  padding: 16px 22px;
+
+  border-top: 1px solid #292929;
+
+  background: #151515;
+
+}
+
+
+/* =========================================================
+   REPORT CANCEL
+========================================================= */
+
+.report-cancel {
+
+  padding: 9px 16px;
+
+  border: 1px solid #383838;
+
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: #aaa;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+}
+
+
+.report-cancel:hover {
+
+  background: #1c1c1c;
+
+  border-color: #555;
+
+  color: #fff;
+
+}
+
+
+/* =========================================================
+   REPORT SUBMIT
+========================================================= */
+
+.report-submit {
+
+  padding: 9px 17px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #f5f5f5;
+
+  color: #111;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+}
+
+
+.report-submit:hover:not(:disabled) {
+
+  background: #ddd;
+
+}
+
+
+.report-submit:active:not(:disabled) {
+
+  transform: scale(0.97);
+
+}
+
+
+.report-submit:disabled {
+
+  opacity: 0.4;
+
+  cursor: not-allowed;
+
+}
+
+
+/* =========================================================
+   REPORT SUCCESS BACKDROP
+========================================================= */
+
+.report-toast-backdrop {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 6000;
+
+  background: rgba(0, 0, 0, 0.20);
+
+  backdrop-filter: blur(6px);
+
+  -webkit-backdrop-filter: blur(6px);
+
+  pointer-events: none;
+
+  animation: reportBackdropIn 0.25s ease forwards;
+
+}
+
+
+/* =========================================================
+   SUCCESS TOAST
+========================================================= */
+
+.report-success-toast {
+
+  position: fixed;
+
+  right: 28px;
+
+  bottom: 28px;
+
+  z-index: 6100;
+
+  width: min(390px, calc(100vw - 40px));
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 14px;
+
+  padding: 17px 18px;
+
+  background: #191919;
+
+  border: 1px solid #383838;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.60);
+
+  animation:
+    reportToastIn 0.30s ease forwards;
+
+}
+
+
+/* =========================================================
+   SUCCESS ICON
+========================================================= */
+
+.toast-success-icon {
+
+  width: 30px;
+
+  height: 30px;
+
+  min-width: 30px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f5f5f5;
+
+  color: #111;
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+}
+
+
+/* =========================================================
+   SUCCESS CONTENT
+========================================================= */
+
+.toast-content {
+
+  min-width: 0;
+
+  flex: 1;
+
+}
+
+
+.toast-title {
+
+  color: #f5f5f5;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  line-height: 1.4;
+
+}
+
+
+.toast-message {
+
+  margin-top: 4px;
+
+  color: #999;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+
+}
+
+
+/* =========================================================
+   SUCCESS CLOSE
+========================================================= */
+
+.report-success-close {
+
+  width: 26px;
+
+  height: 26px;
+
+  margin-left: auto;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: #777;
+
+  font-size: 19px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+}
+
+
+.report-success-close:hover {
+
+  background: #252525;
+
+  color: #fff;
+
+}
+
+
+/* =========================================================
+   TOAST ENTER
+========================================================= */
+
+@keyframes reportToastIn {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateY(18px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+  }
+
+}
+
+
+/* =========================================================
+   BACKDROP ENTER
+========================================================= */
+
+@keyframes reportBackdropIn {
+
+  from {
+
+    opacity: 0;
+
+  }
+
+  to {
+
+    opacity: 1;
+
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .discussion-container {
+
+    width: min(100% - 24px, 1000px);
+
+    padding-top: 20px;
+
+  }
+
+
+  .discussion-header {
+
+    padding-top: 22px;
+
+  }
+
+
+  .discussion-header h1 {
+
+    font-size: 28px;
+
+  }
+
+
+  .discussion-body {
+
+    font-size: 15px;
+
+  }
+
+
+  .comments {
+
+    padding-top: 28px;
+
+  }
+
+
+  .comments h2 {
+
+    font-size: 22px;
+
+  }
+
+
+  .reply-list {
+
+    margin-left: 12px;
+
+    padding-left: 14px;
+
+  }
+
+
+  .comment-actions {
+
+    gap: 13px;
+
+  }
+
+
+  .fixed-comment-box {
+
+    padding: 10px 12px;
+
+  }
+
+
+  .fixed-comment-inner {
+
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+
+  }
+
+
+  .fixed-comment-button {
+
+    width: 100%;
+
+  }
+
+
+  .replying-to {
+
+    grid-column: auto;
+
+  }
+
+
+  /* ==========================================
+     MOBILE REPORT MODAL
+  ========================================== */
+
+  .report-overlay {
+
+    padding: 14px;
+
+    align-items: center;
+
+  }
+
+
+  .report-modal {
+
+    width: 100%;
+
+    max-height: calc(100vh - 28px);
+
+    border-radius: 14px;
+
+  }
+
+
+  .report-header {
+
+    padding: 19px 18px 16px;
+
+  }
+
+
+  .report-preview {
+
+    margin: 16px 18px;
+
+  }
+
+
+  .report-reasons {
+
+    padding: 0 18px 17px;
+
+  }
+
+
+  .report-reason {
+
+    padding: 11px 12px;
+
+  }
+
+
+  .report-actions {
+
+    padding: 14px 18px;
+
+  }
+
+
+  /* ==========================================
+     MOBILE SUCCESS TOAST
+  ========================================== */
+
+  .report-success-toast {
+
+    right: 16px;
+
+    bottom: 16px;
+
+    width: calc(100vw - 32px);
+
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .report-success-toast {
+
+    padding: 15px;
+
+  }
+
+
+  .toast-title {
+
+    font-size: 14px;
+
+  }
+
+
+  .toast-message {
+
+    font-size: 12px;
+
+  }
+
+}

@@ -1,10 +1,18 @@
 <div class="explore">
 
+  <!-- ==========================================
+       HEADER
+  ========================================== -->
+
   <section class="explore-header">
 
-    <p class="eyebrow">DISCOVER</p>
+    <p class="eyebrow">
+      DISCOVER
+    </p>
 
-    <h1>Explore Stories</h1>
+    <h1>
+      Explore Stories
+    </h1>
 
     <p class="subtitle">
       Discover thoughts, dreams and experiences shared by people around the world.
@@ -13,71 +21,829 @@
   </section>
 
 
+  <!-- ==========================================
+       CATEGORIES
+  ========================================== -->
+
   <nav class="categories">
 
-  <button
-    [class.active]="selectedCategory === 'For You'"
-    (click)="selectCategory('For You')">
-    For You
-  </button>
+    <button
+      [class.active]="selectedCategory === 'For You'"
+      (click)="selectCategory('For You')"
+      type="button"
+    >
+      For You
+    </button>
 
-  <button
-    [class.active]="selectedCategory === 'Dream'"
-    (click)="selectCategory('Dream')">
-    Dreams
-  </button>
 
-  <button
-    [class.active]="selectedCategory === 'Real Life'"
-    (click)="selectCategory('Real Life')">
-    Real Life
-  </button>
+    <button
+      [class.active]="selectedCategory === 'Dream'"
+      (click)="selectCategory('Dream')"
+      type="button"
+    >
+      Dreams
+    </button>
 
-  <button
-    [class.active]="selectedCategory === 'Thought'"
-    (click)="selectCategory('Thought')">
-    Thoughts
-  </button>
 
-</nav>
+    <button
+      [class.active]="selectedCategory === 'Real Life'"
+      (click)="selectCategory('Real Life')"
+      type="button"
+    >
+      Real Life
+    </button>
 
+
+    <button
+      [class.active]="selectedCategory === 'Thought'"
+      (click)="selectCategory('Thought')"
+      type="button"
+    >
+      Thoughts
+    </button>
+
+  </nav>
+
+
+  <!-- ==========================================
+       STORIES
+  ========================================== -->
 
   <section class="stories">
 
-    @for (story of filteredStories; track story.title) {
+    @for (
+      story of filteredStories;
+      track story.id
+    ) {
 
-      <article class="story-card">
+      <article
+        class="story-card"
+        [class.comments-open]="expandedStoryId === story.id"
+      >
+
+        <!-- STORY TYPE -->
 
         <div class="story-type">
-          {{ story.icon }} {{ story.type }}
+
+          {{ story.icon }}
+
+          {{ story.type }}
+
         </div>
 
+
+        <!-- STORY TITLE -->
+
         <h2>
+
           {{ story.title }}
+
         </h2>
 
-        <p>
+
+        <!-- STORY CONTENT -->
+
+        <p class="story-content">
+
           {{ story.content }}
+
         </p>
+
+
+        <!-- STORY FOOTER -->
 
         <div class="story-footer">
 
-          <span>
+          <span class="story-author">
+
             {{ story.author }}
+
           </span>
 
-          <div>
-            ♡ {{ story.likes }}
-            &nbsp;&nbsp;
-            💬 {{ story.comments }}
+
+          <div class="story-actions">
+
+            <!-- STORY LIKE -->
+
+            <button
+              class="story-action"
+              [class.liked]="isLiked(story)"
+              (click)="toggleLike(story)"
+              type="button"
+            >
+
+              <span class="action-icon">
+
+                {{ isLiked(story) ? '♥' : '♡' }}
+
+              </span>
+
+              <span>
+
+                {{ story.likes }}
+
+              </span>
+
+            </button>
+
+
+            <!-- STORY COMMENTS -->
+
+            <button
+              class="story-action"
+              [class.active]="expandedStoryId === story.id"
+              (click)="toggleComments(story)"
+              type="button"
+            >
+
+              <span class="action-icon">
+                💬
+              </span>
+
+              <span>
+
+                {{ story.comments }}
+
+              </span>
+
+            </button>
+
+
+
+            <!-- STORY REPORT -->
+
+            <button
+              class="story-report-button"
+              type="button"
+              (click)="openStoryReport(story, $event)"
+            >
+
+              Report
+
+            </button>
+
           </div>
 
         </div>
+
+
+        <!-- ======================================
+             COMMENTS
+        ======================================= -->
+
+        @if (expandedStoryId === story.id) {
+
+          <div class="story-comments">
+
+            <!-- COMMENT LIST -->
+
+            @if (
+              getComments(story).length > 0
+            ) {
+
+              <div class="comment-list">
+
+                @for (
+                  comment of getComments(story);
+                  track comment.id
+                ) {
+
+                  <app-story-comment
+                    [comment]="comment"
+
+                    (like)="toggleCommentLike($event)"
+
+                    (reply)="replyToComment($event, story)"
+
+                    (edit)="editComment($event)"
+
+                    (delete)="deleteComment($event)"
+
+                    (report)="openReport($event)"
+
+                  ></app-story-comment>
+
+                }
+
+              </div>
+
+            }
+
+
+            <!-- EMPTY STATE -->
+
+            @if (
+              getComments(story).length === 0
+            ) {
+
+              <div class="no-comments">
+
+                Be the first to share your thoughts.
+
+              </div>
+
+            }
+
+
+            <!-- NORMAL COMMENT BOX -->
+
+            @if (!replyingTo) {
+
+              <div class="story-comment-box">
+
+                <textarea
+                  [(ngModel)]="commentText"
+
+                  placeholder="Write a comment..."
+
+                  rows="1"
+
+                  (keydown.enter)="
+                    $event.preventDefault();
+                    addComment(story)
+                  "
+                ></textarea>
+
+
+                <button
+                  class="comment-submit"
+
+                  type="button"
+
+                  [disabled]="!commentText.trim()"
+
+                  (click)="addComment(story)"
+                >
+
+                  Comment
+
+                </button>
+
+              </div>
+
+            }
+
+          </div>
+
+        }
 
       </article>
 
     }
 
   </section>
+
+
+  <!-- ==========================================
+       FIXED REPLY BOX
+  ========================================== -->
+
+  @if (replyingTo) {
+
+    <div class="fixed-reply-box">
+
+      <div class="fixed-reply-inner">
+
+        <!-- REPLY TARGET -->
+
+        <div class="replying-to-bar">
+
+          <div class="replying-to-text">
+
+            Replying to
+
+            <strong>
+
+              @{{ replyingTo.author }}
+
+            </strong>
+
+          </div>
+
+
+          <button
+            type="button"
+
+            class="cancel-reply"
+
+            (click)="cancelReply()"
+
+            aria-label="Cancel reply"
+          >
+
+            ×
+
+          </button>
+
+        </div>
+
+
+        <!-- REPLY INPUT -->
+
+        <div class="fixed-reply-input-row">
+
+          <textarea
+            [(ngModel)]="replyText"
+
+            placeholder="Write your reply..."
+
+            rows="1"
+
+            class="fixed-reply-input"
+
+            (keydown.enter)="
+              $event.preventDefault();
+              postReplyForCurrentStory()
+            "
+          ></textarea>
+
+
+          <button
+            class="comment-submit"
+
+            type="button"
+
+            [disabled]="!replyText.trim()"
+
+            (click)="postReplyForCurrentStory()"
+          >
+
+            Reply
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+
+  <!-- ==================================================
+       STORY REPORT MODAL
+  ================================================== -->
+
+  @if (reportingStory) {
+
+    <div
+      class="report-overlay"
+      (click)="closeStoryReport()"
+    >
+
+      <div
+        class="report-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="story-report-title"
+        (click)="$event.stopPropagation()"
+      >
+
+        <div class="report-header">
+
+          <div>
+
+            <h2 id="story-report-title">
+              Report story
+            </h2>
+
+            <p>
+              Why are you reporting this story?
+            </p>
+
+          </div>
+
+          <button
+            type="button"
+            class="report-close"
+            (click)="closeStoryReport()"
+            aria-label="Close report"
+          >
+
+            ×
+
+          </button>
+
+        </div>
+
+
+        <!-- STORY PREVIEW -->
+
+        <div class="report-story-preview">
+
+          <div class="report-story-author">
+
+            @{{ reportingStory.author }}
+
+          </div>
+
+          <div class="report-story-title">
+
+            {{ reportingStory.title }}
+
+          </div>
+
+          <div class="report-story-content">
+
+            {{ reportingStory.content }}
+
+          </div>
+
+        </div>
+
+
+        <!-- REPORT REASONS -->
+
+        <div class="report-reasons">
+
+          @for (
+            reason of reportReasons;
+            track reason
+          ) {
+
+            <button
+              type="button"
+              class="report-reason"
+              [class.selected]="reportReason === reason"
+              (click)="selectReportReason(reason)"
+            >
+
+              <span
+                class="report-radio"
+                [class.checked]="reportReason === reason"
+              ></span>
+
+              <span>
+
+                {{ reason }}
+
+              </span>
+
+            </button>
+
+          }
+
+        </div>
+
+
+        <!-- OTHER REASON -->
+
+        @if (reportReason === 'Other') {
+
+          <div class="report-other-box">
+
+            <label
+              for="storyReportDetails"
+              class="report-other-label"
+            >
+
+              Please specify the reason
+
+            </label>
+
+            <textarea
+              id="storyReportDetails"
+              class="report-other-input"
+              [(ngModel)]="reportDetails"
+              maxlength="500"
+              rows="4"
+              placeholder="Tell us why you are reporting this story..."
+            ></textarea>
+
+            <div class="report-character-count">
+
+              {{ reportDetailsLength }}/500
+
+            </div>
+
+          </div>
+
+        }
+
+
+        <!-- REPORT ACTIONS -->
+
+        <div class="report-actions">
+
+          <button
+            type="button"
+            class="report-cancel"
+            (click)="closeStoryReport()"
+          >
+
+            Cancel
+
+          </button>
+
+          <button
+            type="button"
+            class="report-submit"
+            [disabled]="!canSubmitReport()"
+            (click)="submitStoryReport()"
+          >
+
+            Submit Report
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+
+  <!-- ==================================================
+       COMMENT REPORT MODAL
+  ================================================== -->
+
+  @if (reportingComment) {
+
+    <div
+      class="report-overlay"
+
+      (click)="closeReport()"
+    >
+
+      <div
+        class="report-modal"
+
+        role="dialog"
+
+        aria-modal="true"
+
+        aria-labelledby="report-title"
+
+        (click)="$event.stopPropagation()"
+      >
+
+        <!-- ======================================
+             REPORT HEADER
+        ======================================= -->
+
+        <div class="report-header">
+
+          <div>
+
+            <h2 id="report-title">
+              Report comment
+            </h2>
+
+            <p>
+              Why are you reporting this comment?
+            </p>
+
+          </div>
+
+
+          <button
+            type="button"
+
+            class="report-close"
+
+            (click)="closeReport()"
+
+            aria-label="Close report"
+          >
+
+            ×
+
+          </button>
+
+        </div>
+
+
+        <!-- ======================================
+             COMMENT PREVIEW
+        ======================================= -->
+
+        <div class="report-preview">
+
+          <div class="report-preview-author">
+
+            @{{ reportingComment.author }}
+
+          </div>
+
+
+          <div class="report-preview-content">
+
+            {{ reportingComment.content }}
+
+          </div>
+
+        </div>
+
+
+        <!-- ======================================
+             REPORT REASONS
+        ======================================= -->
+
+        <div class="report-reasons">
+
+          @for (
+            reason of reportReasons;
+            track reason
+          ) {
+
+            <button
+              type="button"
+
+              class="report-reason"
+
+              [class.selected]="
+                reportReason === reason
+              "
+
+              (click)="
+                selectReportReason(reason)
+              "
+            >
+
+              <span
+                class="report-radio"
+
+                [class.checked]="
+                  reportReason === reason
+                "
+              ></span>
+
+
+              <span>
+
+                {{ reason }}
+
+              </span>
+
+            </button>
+
+          }
+
+        </div>
+
+
+        <!-- ======================================
+             OTHER REASON
+        ======================================= -->
+
+        @if (
+          reportReason === 'Other'
+        ) {
+
+          <div class="report-other-box">
+
+            <label
+              for="reportDetails"
+
+              class="report-other-label"
+            >
+
+              Please specify the reason
+
+            </label>
+
+
+            <textarea
+              id="reportDetails"
+
+              class="report-other-input"
+
+              [(ngModel)]="reportDetails"
+
+              maxlength="500"
+
+              rows="4"
+
+              placeholder="Tell us why you are reporting this comment..."
+            ></textarea>
+
+
+            <div class="report-character-count">
+
+              {{ reportDetailsLength }}/500
+
+            </div>
+
+          </div>
+
+        }
+
+
+        <!-- ======================================
+             REPORT ACTIONS
+        ======================================= -->
+
+        <div class="report-actions">
+
+          <button
+            type="button"
+
+            class="report-cancel"
+
+            (click)="closeReport()"
+          >
+
+            Cancel
+
+          </button>
+
+
+          <button
+            type="button"
+
+            class="report-submit"
+
+            [disabled]="!canSubmitReport()"
+
+            (click)="submitReport()"
+          >
+
+            Submit Report
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+
+  <!-- ==================================================
+       REPORT SUCCESS
+  ================================================== -->
+
+  <!-- ==================================================
+     REPORT SUCCESS TOAST
+================================================== -->
+
+@if (reportSuccess) {
+
+  <!-- BACKGROUND BLUR -->
+
+  <div
+    class="report-toast-backdrop"
+    aria-hidden="true"
+  ></div>
+
+
+  <!-- SUCCESS TOAST -->
+
+  <div
+    class="report-success-toast"
+    role="status"
+    aria-live="polite"
+  >
+
+    <!-- CHECK -->
+
+    <div class="toast-success-icon">
+
+      ✓
+
+    </div>
+
+
+    <!-- MESSAGE -->
+
+    <div class="toast-content">
+
+      <div class="toast-title">
+
+        Report submitted
+
+      </div>
+
+
+      <div class="toast-message">
+
+        Thank you for helping keep the community safe.
+
+      </div>
+
+    </div>
+
+
+    <!-- CLOSE -->
+
+    <button
+      type="button"
+      class="report-success-close"
+      (click)="closeReportSuccess()"
+      aria-label="Close notification"
+    >
+
+      ×
+
+    </button>
+
+  </div>
+
+}
 
 </div>

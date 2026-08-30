@@ -24,7 +24,7 @@ export const routes: Routes = [
     component: Communities
   },
   {
-    path: 'discussion',
+    path: 'discussion/:id',
     component: Discussion
   },
   {
