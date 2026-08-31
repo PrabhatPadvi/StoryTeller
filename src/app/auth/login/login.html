@@ -1,0 +1,114 @@
+<div class="auth-page">
+
+  <div class="auth-card">
+
+    <div class="auth-header">
+
+      <div class="auth-logo">
+        StoryTeller
+      </div>
+
+      <h1>Welcome back</h1>
+
+      <p>
+        Login to continue sharing your stories.
+      </p>
+
+    </div>
+
+
+    @if (errorMessage) {
+
+      <div class="auth-error">
+        {{ errorMessage }}
+      </div>
+
+    }
+
+
+    <form (ngSubmit)="login()">
+
+      <div class="form-group">
+
+        <label for="usernameOrEmail">
+          Username or Email
+        </label>
+
+        <input
+          id="usernameOrEmail"
+          name="usernameOrEmail"
+          type="text"
+          [(ngModel)]="usernameOrEmail"
+          placeholder="Enter your username or email"
+          autocomplete="username"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="password">
+          Password
+        </label>
+
+        <input
+          id="password"
+          name="password"
+          type="password"
+          [(ngModel)]="password"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+          required
+        >
+
+      </div>
+
+
+      <!-- Cloudflare Turnstile CAPTCHA -->
+
+      <div class="captcha-container">
+
+        <ngx-turnstile
+          [siteKey]="'0x4AAAAAAEi8BxvImeAY835C'"
+          (resolved)="onCaptchaResolved($event)"
+          (expired)="onCaptchaExpired()"
+          (error)="onCaptchaError()">
+        </ngx-turnstile>
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="auth-button"
+        [disabled]="isLoading"
+      >
+
+        @if (isLoading) {
+          Logging in...
+        } @else {
+          Login
+        }
+
+      </button>
+
+    </form>
+
+
+    <div class="auth-footer">
+
+      <span>
+        Don't have an account?
+      </span>
+
+      <a routerLink="/register">
+        Create one
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
