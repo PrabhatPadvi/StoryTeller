@@ -1,0 +1,437 @@
+.auth-page {
+
+  min-height: calc(100vh - 70px);
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 40px 20px;
+
+  background: #0f0f0f;
+}
+
+
+.auth-card {
+
+  width: 100%;
+
+  max-width: 430px;
+
+  padding: 40px;
+
+  background: #161616;
+
+  border: 1px solid #292929;
+
+  border-radius: 16px;
+
+  box-sizing: border-box;
+}
+
+
+.auth-header {
+
+  text-align: center;
+
+  margin-bottom: 30px;
+}
+
+
+.auth-logo {
+
+  font-size: 24px;
+
+  font-weight: 700;
+
+  color: #ffffff;
+
+  margin-bottom: 30px;
+}
+
+
+.auth-header h1 {
+
+  margin: 0 0 10px;
+
+  font-size: 30px;
+
+  color: #ffffff;
+}
+
+
+.auth-header p {
+
+  margin: 0;
+
+  color: #999999;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+
+/* ==========================================
+   FORM
+   ========================================== */
+
+.form-group {
+
+  margin-bottom: 18px;
+}
+
+
+.form-group label {
+
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #d6d6d6;
+
+  font-size: 14px;
+}
+
+
+/* ==========================================
+   NORMAL INPUTS
+   ========================================== */
+
+.form-group input {
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 13px 14px;
+
+  background: #101010;
+
+  border: 1px solid #303030;
+
+  border-radius: 9px;
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.form-group input:focus {
+
+  border-color: #666666;
+
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
+}
+
+
+.form-group input::placeholder {
+
+  color: #666666;
+}
+
+
+/* ==========================================
+   PASSWORD INPUT WRAPPER
+   ========================================== */
+
+.password-wrapper {
+
+  position: relative;
+
+  width: 100%;
+
+  display: block;
+}
+
+
+/*
+   Password inputs need extra space on
+   the right so text doesn't go underneath
+   the eye button.
+*/
+
+.password-wrapper input {
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 13px 50px 13px 14px;
+}
+
+
+/* ==========================================
+   PASSWORD EYE BUTTON
+   ========================================== */
+
+.password-toggle {
+
+  position: absolute;
+
+  top: 50%;
+
+  right: 6px;
+
+  transform: translateY(-50%);
+
+  width: 36px;
+
+  height: 36px;
+
+  margin: 0;
+
+  padding: 0;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: transparent !important;
+
+  color: #888888;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  appearance: none;
+
+  -webkit-appearance: none;
+
+  outline: none;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+
+/* Hover should still look like part
+   of the input */
+
+.password-toggle:hover {
+
+  background: rgba(255, 255, 255, 0.06) !important;
+
+  color: #ffffff;
+}
+
+
+/* Prevent browser focus styling */
+
+.password-toggle:focus {
+
+  outline: none;
+
+  box-shadow: none;
+}
+
+
+.password-toggle:focus-visible {
+
+  outline: 1px solid #555555;
+
+  outline-offset: -2px;
+}
+
+
+.password-toggle:active {
+
+  background: rgba(255, 255, 255, 0.10) !important;
+}
+
+
+/* ==========================================
+   EYE ICON
+   ========================================== */
+
+.eye-icon {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 20px;
+
+  height: 20px;
+
+  font-size: 17px;
+
+  line-height: 1;
+
+  opacity: 0.75;
+}
+
+
+.password-toggle:hover .eye-icon {
+
+  opacity: 1;
+}
+
+
+/* ==========================================
+   AUTH BUTTON
+   ========================================== */
+
+.auth-button {
+
+  width: 100%;
+
+  margin-top: 8px;
+
+  padding: 13px 16px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  color: #111111;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    opacity 0.2s ease;
+}
+
+
+.auth-button:hover {
+
+  background: #e8e8e8;
+}
+
+
+.auth-button:disabled {
+
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+
+/* ==========================================
+   ERROR / SUCCESS
+   ========================================== */
+
+.auth-error,
+.auth-success {
+
+  margin-bottom: 20px;
+
+  padding: 12px 14px;
+
+  border-radius: 8px;
+
+  font-size: 14px;
+
+  line-height: 1.4;
+}
+
+
+.auth-error {
+
+  border: 1px solid #5a2c2c;
+
+  background: #241515;
+
+  color: #ff9b9b;
+}
+
+
+.auth-success {
+
+  border: 1px solid #294a35;
+
+  background: #142219;
+
+  color: #9de0b1;
+}
+
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+
+.auth-footer {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 6px;
+
+  margin-top: 25px;
+
+  color: #888888;
+
+  font-size: 14px;
+}
+
+
+.auth-footer a {
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-weight: 500;
+}
+
+
+.auth-footer a:hover {
+
+  text-decoration: underline;
+}
+
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+
+@media (max-width: 500px) {
+
+  .auth-page {
+
+    padding: 30px 16px;
+  }
+
+
+  .auth-card {
+
+    padding: 30px 22px;
+  }
+
+
+  .auth-header h1 {
+
+    font-size: 26px;
+  }
+
+
+  .auth-logo {
+
+    margin-bottom: 25px;
+  }
+}

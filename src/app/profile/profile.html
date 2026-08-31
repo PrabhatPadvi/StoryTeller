@@ -1,0 +1,146 @@
+<div class="profile-page">
+
+  <div class="profile-container">
+
+    <!-- PROFILE HEADER -->
+
+    <section class="profile-card">
+
+      <div class="profile-avatar">
+
+        @if (currentUser?.avatarUrl) {
+
+          <img
+            [src]="currentUser?.avatarUrl"
+            [alt]="getMemberName()"
+          >
+
+        } @else {
+
+          <span>
+            {{ getUserInitials() }}
+          </span>
+
+        }
+
+      </div>
+
+
+      <div class="profile-info">
+
+        <h1>
+          {{ currentUser?.username || 'User' }}
+        </h1>
+
+        <p class="profile-email">
+          {{ currentUser?.email }}
+        </p>
+
+        <p class="profile-handle">
+          @{{ currentUser?.username || 'user' }}
+        </p>
+
+      </div>
+
+
+      <div class="profile-actions">
+
+        <button
+          type="button"
+          class="edit-profile-button"
+        >
+          Edit Profile
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROFILE STATS -->
+
+    <section class="profile-stats">
+
+      <div class="stat">
+
+        <strong>
+          0
+        </strong>
+
+        <span>
+          Stories
+        </span>
+
+      </div>
+
+
+      <div class="stat">
+
+        <strong>
+          0
+        </strong>
+
+        <span>
+          Followers
+        </span>
+
+      </div>
+
+
+      <div class="stat">
+
+        <strong>
+          0
+        </strong>
+
+        <span>
+          Following
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <!-- STORIES -->
+
+    <section class="stories-section">
+
+      <div class="section-header">
+
+        <h2>
+          My Stories
+        </h2>
+
+      </div>
+
+
+      <div class="empty-stories">
+
+        <div class="empty-icon">
+          ✦
+        </div>
+
+        <h3>
+          No stories yet
+        </h3>
+
+        <p>
+          You haven't shared any stories yet.
+        </p>
+
+
+        <a
+          routerLink="/share"
+          class="share-button"
+        >
+          Share Your First Story
+        </a>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</div>

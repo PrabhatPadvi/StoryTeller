@@ -1,0 +1,216 @@
+<div class="auth-page">
+
+  <div class="auth-card">
+
+    <div class="auth-header">
+
+      <div class="auth-logo">
+        StoryTeller
+      </div>
+
+      <h1>Create your account</h1>
+
+      <p>
+        Join StoryTeller and start sharing your stories.
+      </p>
+
+    </div>
+
+
+    <!-- ERROR MESSAGE -->
+
+    @if (errorMessage) {
+
+      <div class="auth-error">
+        {{ errorMessage }}
+      </div>
+
+    }
+
+
+    <!-- SUCCESS MESSAGE -->
+
+    @if (successMessage) {
+
+      <div class="auth-success">
+        ✓ {{ successMessage }}
+      </div>
+
+    }
+
+
+    <form (ngSubmit)="register()">
+
+
+      <!-- USERNAME -->
+
+      <div class="form-group">
+
+        <label for="username">
+          Username
+        </label>
+
+        <input
+          id="username"
+          name="username"
+          type="text"
+          [(ngModel)]="username"
+          placeholder="Choose a username"
+          autocomplete="username"
+          required
+        >
+
+      </div>
+
+
+      <!-- EMAIL -->
+
+      <div class="form-group">
+
+        <label for="email">
+          Email
+        </label>
+
+        <input
+          id="email"
+          name="email"
+          type="email"
+          [(ngModel)]="email"
+          placeholder="Enter your email"
+          autocomplete="email"
+          required
+        >
+
+      </div>
+
+
+      <!-- PASSWORD -->
+
+      <!-- PASSWORD -->
+
+<div class="form-group">
+
+  <label for="password">
+    Password
+  </label>
+
+  <div class="password-wrapper">
+
+    <input
+      id="password"
+      name="password"
+      [type]="showPassword ? 'text' : 'password'"
+      [(ngModel)]="password"
+      placeholder="Create a password"
+      autocomplete="new-password"
+      required
+    >
+
+    <button
+      type="button"
+      class="password-toggle"
+      (click)="togglePasswordVisibility()"
+      [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+    >
+      @if (showPassword) {
+        <span class="eye-icon">◉</span>
+      } @else {
+        <span class="eye-icon">◉</span>
+      }
+    </button>
+
+  </div>
+
+</div>
+
+
+      <!-- CONFIRM PASSWORD -->
+
+<div class="form-group">
+
+  <label for="confirmPassword">
+    Confirm Password
+  </label>
+
+  <div class="password-wrapper">
+
+    <input
+      id="confirmPassword"
+      name="confirmPassword"
+      [type]="showConfirmPassword ? 'text' : 'password'"
+      [(ngModel)]="confirmPassword"
+      placeholder="Confirm your password"
+      autocomplete="new-password"
+      required
+    >
+
+    <button
+      type="button"
+      class="password-toggle"
+      (click)="toggleConfirmPasswordVisibility()"
+      [attr.aria-label]="showConfirmPassword ? 'Hide password' : 'Show password'"
+    >
+      <span class="eye-icon">◉</span>
+    </button>
+
+  </div>
+
+</div>
+
+
+      <!-- CLOUDFLARE TURNSTILE -->
+
+      <div class="captcha-container">
+
+        <ngx-turnstile
+          [siteKey]="'0x4AAAAAAEi8BxvImeAY835C'"
+          (resolved)="onCaptchaResolved($event)"
+          (expired)="onCaptchaExpired()"
+          (error)="onCaptchaError()"
+        >
+        </ngx-turnstile>
+
+      </div>
+
+
+      <!-- CREATE ACCOUNT -->
+
+      <button
+        type="submit"
+        class="auth-button"
+        [disabled]="isLoading"
+      >
+
+        @if (isLoading) {
+
+          Creating account...
+
+        } @else {
+
+          Create Account
+
+        }
+
+      </button>
+
+
+    </form>
+
+
+    <!-- FOOTER -->
+
+    <div class="auth-footer">
+
+      <span>
+        Already have an account?
+      </span>
+
+      <a routerLink="/login">
+        Login
+      </a>
+
+    </div>
+
+  </div>
+
+</div>

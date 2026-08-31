@@ -1,15 +1,180 @@
 <header class="navbar">
 
+  <!-- ======================================
+       LOGO
+       ====================================== -->
+
   <div class="logo">
     StoryTeller
   </div>
 
-<nav>
-  <a routerLink="/">Home</a>
-  <a routerLink="/explore">Explore</a>
-  <a routerLink="/communities">Communities</a>
-  <a routerLink="/share">Share</a>
-  <a href="#">Login</a>
-</nav>
+
+  <!-- ======================================
+       NAVIGATION
+       ====================================== -->
+
+  <nav>
+
+    <a routerLink="/">
+      Home
+    </a>
+
+    <a routerLink="/explore">
+      Explore
+    </a>
+
+    <a routerLink="/communities">
+      Communities
+    </a>
+
+    <a routerLink="/share">
+      Share
+    </a>
+
+
+    <!-- ====================================
+         LOGGED OUT
+         ==================================== -->
+
+    @if (!currentUser) {
+
+      <a routerLink="/login">
+        Login
+      </a>
+
+    }
+
+
+    <!-- ====================================
+         LOGGED IN
+         ==================================== -->
+
+    @if (currentUser) {
+
+      <div class="profile-container">
+
+        <!-- AVATAR BUTTON -->
+
+        <button
+          type="button"
+          class="user-avatar"
+          (click)="toggleProfileMenu()"
+          [attr.aria-expanded]="isProfileMenuOpen"
+          [attr.aria-label]="'Open profile menu for ' + currentUser.username"
+        >
+
+          {{ getUserInitials() }}
+
+        </button>
+
+
+        <!-- ==================================
+             PROFILE DROPDOWN
+             ================================== -->
+
+        @if (isProfileMenuOpen) {
+
+          <div class="profile-menu">
+
+
+            <!-- USER INFORMATION -->
+
+            <div class="profile-menu-header">
+
+              <div class="profile-menu-avatar">
+                {{ getUserInitials() }}
+              </div>
+
+              <div class="profile-menu-user">
+
+                <div class="profile-menu-name">
+                  {{ currentUser.username }}
+                </div>
+
+                <div class="profile-menu-email">
+                  {{ currentUser.email }}
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- DIVIDER -->
+
+            <div class="profile-menu-divider"></div>
+
+
+            <!-- VIEW PROFILE -->
+
+            <a
+              routerLink="/profile"
+              class="profile-menu-item"
+              (click)="closeProfileMenu()"
+            >
+
+              <span class="menu-icon">
+                👤
+              </span>
+
+              <span>
+                View Profile
+              </span>
+
+            </a>
+
+
+            <!-- SETTINGS -->
+
+            <a
+              routerLink="/settings"
+              class="profile-menu-item"
+              (click)="closeProfileMenu()"
+            >
+
+              <span class="menu-icon">
+                ⚙
+              </span>
+
+              <span>
+                Settings
+              </span>
+
+            </a>
+
+
+            <!-- DIVIDER -->
+
+            <div class="profile-menu-divider"></div>
+
+
+            <!-- LOGOUT -->
+
+            <button
+              type="button"
+              class="profile-menu-item logout-item"
+              (click)="logout()"
+            >
+
+              <span class="menu-icon">
+                ↪
+              </span>
+
+              <span>
+                Logout
+              </span>
+
+            </button>
+
+
+          </div>
+
+        }
+
+      </div>
+
+    }
+
+  </nav>
 
 </header>
